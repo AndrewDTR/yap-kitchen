@@ -1,25 +1,18 @@
 import { error } from '@sveltejs/kit';
-import { db } from '../../helper/database';
+import { pb } from '../../helper/database';
 
 export async function load({ params }) {
-	const user = db.prepare('SELECT username FROM users WHERE username = ?').get(params.name);
+	const user = await pb
+		.collection('users')
+		.getFirstListItem(`username = "${params.name}"`, { fields: 'created, id, username, description, personal_link' });
 
 	if (!user) {
-		throw error(404, 'User not found');
+		error(404);
 	}
 
-	const posts = db
-		.prepare(
-			`
-        SELECT id, title, date, slug, content, edit_date
-        FROM posts
-        WHERE author = (SELECT id FROM users WHERE username = ?);
-    `
-		)
-		.all(params.name);
+	const posts = await pb.collection('posts').getFullList({
+		filter: `author = "${user.id}"`
+	});
 
-	return {
-		username: user.username,
-		posts
-	};
+	return { user, posts };
 }

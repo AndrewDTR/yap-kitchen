@@ -1,7 +1,7 @@
 <nav>
     <a href="/">Home</a>
     <a href="/about">About</a>
-    <a href="/lists">Lists</a>
+    <a href="/users">Users</a>
 </nav>
 
 <slot></slot>

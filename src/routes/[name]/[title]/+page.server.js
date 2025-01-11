@@ -1,5 +1,5 @@
 import { error } from '@sveltejs/kit';
-import { db } from '../../../helper/database'
+import { pb } from '../../../helper/database'
 import markdownit from 'markdown-it'
 
 const md = markdownit()
