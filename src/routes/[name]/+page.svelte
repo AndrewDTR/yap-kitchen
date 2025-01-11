@@ -16,7 +16,7 @@
     <h3>they have the following blog posts</h3>
 	<div>
 		{#each data.posts as post}
-			<p>{post.title} - {post.created}</p>
+			<p><a href="/{data.user.username}/{post.slug}">{post.title}</a> - {post.humanReadableTime}</p>
 		{/each}
 	</div>{:else}
 	<h3>they have no blog posts :&#40;</h3>

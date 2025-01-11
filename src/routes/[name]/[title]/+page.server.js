@@ -1,23 +1,45 @@
 import { error } from '@sveltejs/kit';
-import { pb } from '../../../helper/database'
-import markdownit from 'markdown-it'
+import { pb } from '../../../helper/database';
+import markdownit from 'markdown-it';
+import { format } from 'date-fns';
 
-const md = markdownit()
+const md = markdownit();
 
 export async function load({ params }) {
-    const query = `
-        SELECT posts.*, users.username
-        FROM posts
-        JOIN users ON users.id = posts.author
-        WHERE users.username = ? AND posts.slug = ?;
-    `;
+	const user = await pb.collection('users').getFirstListItem(`username = "${params.name}"`);
+	if (!user) {
+		throw error(404, 'User not found');
+	}
 
-    const post = db.prepare(query).get(params.name, params.title);
+	const post = await pb
+		.collection('posts')
+		.getFirstListItem(`author = "${user.id}" && slug = "${params.title}"`, { expand: 'author' });
 
-    if (post) {
-		const result = md.render(post.content);
-        return { post, result };
-    }
+	if (!post) {
+		throw error(404, 'Post not found');
+	}
 
-    throw error(404, 'Post not found');
+	const result = md.render(post.content);
+
+	const author = {
+		username: post.expand?.author?.username,
+		color: post.expand?.author?.color
+	};
+
+	const sanitizedPost = {
+		id: post.id,
+		title: post.title,
+		slug: post.slug,
+		content: post.content,
+		created: post.created,
+		updated: post.updated,
+		createdHumanReadable: format(new Date(post.created), 'MMMM do, yyyy'),
+		updatedHumanReadable: format(new Date(post.updated), 'MMMM do, yyyy')
+	};
+
+	return {
+		post: sanitizedPost,
+		result,
+		author
+	};
 }
