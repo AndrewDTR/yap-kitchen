@@ -30,12 +30,12 @@
 </div>
 
 <svelte:head>
-	<meta property="og:title" content="{data.user.username} - yap kitchen" />
+	<meta property="og:title" content="{data.user.username} - yap.kitchen" />
 	{#if data.posts.length === 0}
 		<meta
 			property="og:description"
 			content="Check out {data.user
-				.username}'s profile on yap.kitchen! They haven't written anything, but you still should check it out."
+				.username}'s profile on yap.kitchen! They haven't written anything, but you still should check 'em out."
 		/>
 	{:else if data.posts.length === 1}
 		<meta
