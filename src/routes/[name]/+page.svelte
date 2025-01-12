@@ -28,3 +28,33 @@
 		<h3>they have no blog posts :&#40;</h3>
 	{/if}
 </div>
+
+<svelte:head>
+	<meta property="og:title" content="{data.user.username} - yap kitchen" />
+	{#if data.posts.length === 0}
+		<meta
+			property="og:description"
+			content="Check out {data.user
+				.username}'s profile on yap.kitchen! They haven't written anything, but you still should check it out."
+		/>
+	{:else if data.posts.length === 1}
+		<meta
+			property="og:description"
+			content="Check out {data.user
+				.username}'s 1 blog post on yap.kitchen! Hey, we all start somewhere..."
+		/>
+	{:else}
+		<meta
+			property="og:description"
+			content="Check out {data.user.username}'s {data.posts
+				.length} blog posts on yap.kitchen! They've clearly been writing up a storm..."
+		/>
+	{/if}
+
+	<meta property="og:url" content="https://www.yap.kitchen/{data.user.username}" />
+	<meta property="og:type" content="website" />
+	<!-- <meta property="og:image" content="https://www.yap.kitchen/{data.user.username}/avatar" />
+	<meta property="og:image:width" content="300" />
+	<meta property="og:image:height" content="300" /> -->
+	<meta name="theme-color" content={data.user.color} />
+</svelte:head>

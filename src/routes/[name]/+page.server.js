@@ -5,7 +5,7 @@ import pb from '../../helper/superuser.js';
 export async function load({ params }) {
 	try {
 		const user = await pb.collection('users').getFirstListItem(`username = "${params.name}"`, {
-			fields: 'created, id, username, description, personal_link, color'
+			fields: 'created, id, username, description, personal_link, avatar, color'
 		});
 
 		if (!user) {
