@@ -1,0 +1,95 @@
+/* css reset below provided by https://www.joshwcomeau.com/css/custom-css-reset/ */
+
+/* 1. Use a more-intuitive box-sizing model */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+/* 2. Remove default margin */
+* {
+	margin: 0;
+}
+body {
+	/* 3. Add accessible line-height */
+	line-height: 1.5;
+	/* 4. Improve text rendering */
+	-webkit-font-smoothing: antialiased;
+}
+/* 5. Improve media defaults */
+img,
+picture,
+video,
+canvas,
+svg {
+	display: block;
+	max-width: 100%;
+}
+/* 6. Inherit fonts for form controls */
+input,
+button,
+textarea,
+select {
+	font: inherit;
+}
+/* 7. Avoid text overflows */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	overflow-wrap: break-word;
+}
+/* 8. Improve line wrapping */
+p {
+	text-wrap: pretty;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	text-wrap: balance;
+}
+
+@font-face {
+	font-family: 'Source Sans 3';
+	src: url('/fonts/SourceSans3-VariableFont_wght.ttf') format('truetype');
+	font-weight: 100 900;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Source Sans 3';
+	src: url('/fonts/SourceSans3-Italic-VariableFont_wght.ttf') format('truetype');
+	font-weight: 100 900;
+	font-style: italic;
+}
+
+:root {
+	--font-family-sans: 'Source Sans 3', sans-serif;
+}
+
+html,
+body {
+	font-family: var(--font-family-sans);
+}
+
+p {
+	line-height: 1.2em;
+}
+
+.content {
+	max-width: 800px;
+	margin: 0 auto;
+	padding-inline: 0;
+}
+
+@media (max-width: 1000px) {
+	.content {
+		padding-inline: clamp(1rem, 5vw, 2rem);
+	}
+}

@@ -3,11 +3,9 @@
 	console.log(data);
 </script>
 
-<h1>welcome to the blog post page</h1>
-<h2>you are viewing a blog post made by {data.author.username}</h2>
-<p>it is titled {data.post.title}</p>
-<p>it was posted {data.post.createdHumanReadable}</p>
-<p>the slug, as you know, is {data.post.slug}</p>
+<div class="content">
+	<h1 class="title">{data.post.title}</h1>
+	<p><a href="/{data.author.username}">{data.author.username}</a> | {data.post.createdHumanReadable}</p>
 
-<p>here is the actual post</p>
-<div>{@html data.result}</div>
+	<div>{@html data.result}</div>
+</div>

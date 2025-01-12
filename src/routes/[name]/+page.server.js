@@ -5,7 +5,7 @@ import { format } from 'date-fns';
 export async function load({ params }) {
 	try {
 		const user = await pb.collection('users').getFirstListItem(`username = "${params.name}"`, {
-			fields: 'created, id, username, description, personal_link'
+			fields: 'created, id, username, description, personal_link, color'
 		});
 
 		if (!user) {

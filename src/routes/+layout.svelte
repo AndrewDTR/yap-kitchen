@@ -1,7 +1,7 @@
-<nav>
-    <a href="/">Home</a>
-    <a href="/about">About</a>
-    <a href="/users">Users</a>
-</nav>
+<script>
+	import Navbar from '$lib/Navbar.svelte';
+</script>
+
+<Navbar />
 
 <slot></slot>
