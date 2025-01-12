@@ -1,8 +1,11 @@
 import { error } from '@sveltejs/kit';
-import { pb } from '../../helper/database';
 import { format } from 'date-fns';
+import PocketBase from 'pocketbase';
+import { env } from '$env/dynamic/private';
 
 export async function load({ params }) {
+	const pb = new PocketBase(env.POCKETBASE_URL);
+
 	try {
 		const user = await pb.collection('users').getFirstListItem(`username = "${params.name}"`, {
 			fields: 'created, id, username, description, personal_link, color'
