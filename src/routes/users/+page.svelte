@@ -1,6 +1,6 @@
 <script>
-	let { data } = $props();
 	import UserCard from '$lib/UserCard.svelte';
+	let { data } = $props();
 </script>
 
 <div class="content">
