@@ -1,7 +1,10 @@
 import { error } from '@sveltejs/kit';
-import { pb } from '../../../helper/database';
 import markdownit from 'markdown-it';
 import { format } from 'date-fns';
+import PocketBase from 'pocketbase';
+import { env } from '$env/dynamic/private';
+
+const pb = new PocketBase(env.POCKETBASE_URL);
 
 const md = markdownit();
 
