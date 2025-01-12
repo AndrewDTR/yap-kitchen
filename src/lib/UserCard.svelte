@@ -55,8 +55,8 @@
 		display: flex;
 		flex-direction: column;
 		transition:
-			transform 0.05s ease,
-			box-shadow 0.05s ease,
+			transform 0.15s ease,
+			box-shadow 0.2s ease,
 			background-color 0.2s ease;
 		align-items: flex-start;
 		height: 100%;
