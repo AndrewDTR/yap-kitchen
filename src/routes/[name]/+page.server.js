@@ -12,6 +12,14 @@ export async function load({ params }) {
 			error(404);
 		}
 
+		const record = await pb.collection('users').getOne(user.id);
+
+		const userWithAvatar = {
+			...user,
+			avatarUrl: user.avatar ? pb.files.getURL(record, user.avatar) : null,
+			humanReadableCreated: format(new Date(user.created), 'MMMM do, yyyy')
+		};
+
 		const posts = await pb.collection('posts').getFullList({
 			filter: `author = "${user.id}"`
 		});
@@ -24,7 +32,7 @@ export async function load({ params }) {
 			};
 		});
 
-		return { user, posts: formattedPosts };
+		return { user: userWithAvatar, posts: formattedPosts };
 	} catch (err) {
 		if (err.status == 404) {
 			error(404);

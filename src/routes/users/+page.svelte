@@ -8,7 +8,12 @@
 
 	<div class="user-list">
 		{#each data.users as user}
-			<UserCard name={user.username} description={user.description} color={user.color} />
+			<UserCard
+				name={user.username}
+				description={user.description}
+				color={user.color}
+				avatar={user.avatarUrl}
+			/>
 		{/each}
 	</div>
 </div>

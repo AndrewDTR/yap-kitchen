@@ -2,6 +2,7 @@
 	export let name = 'Name Placeholder';
 	export let description = 'Description Placeholder';
 	export let color = '#000000';
+	export let avatar = '';
 
 	function adjustColor(hex, factor, mode = 'lighten') {
 		let r = parseInt(hex.slice(1, 3), 16);
@@ -33,12 +34,15 @@
 	<div
 		class="user"
 		style="
-      --base-color: {color};
-      --shadow-color: {shadowColor};
-	  --click-color: {clickColor};
-    "
+		--base-color: {color};
+		--shadow-color: {shadowColor};
+		--click-color: {clickColor};
+	  "
 	>
-		<h2>{name}</h2>
+		<div class="header">
+			<img class="avatar" src={avatar} alt="{name}'s avatar" />
+			<h2>{name}</h2>
+		</div>
 		<p>{description}</p>
 	</div>
 </a>
@@ -90,5 +94,25 @@
 	a:hover,
 	a:active {
 		text-decoration: none;
+	}
+
+	.header {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		
+	}
+
+	h2 {
+		margin: 0;
+	}
+
+	.avatar {
+		width: 34px;
+		height: 34px;
+		/* border-radius: 50%; */
+		object-fit: cover;
+		border: 2px solid black;
+		box-shadow: 2px 2px 0px var(--shadow-color);
 	}
 </style>
