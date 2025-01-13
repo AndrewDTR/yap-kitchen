@@ -23,7 +23,15 @@ export async function load({ params }) {
 
 	const author = {
 		username: post.expand?.author?.username,
-		color: post.expand?.author?.color
+		color: post.expand?.author?.color,
+		avatar: post.expand?.author?.avatar
+	};
+
+	const avatarUrl = user.avatar ? pb.files.getURL(user, author.avatar) : null;
+
+	const authorWithAvatar = {
+		...author,
+		avatarUrl
 	};
 
 	const sanitizedPost = {
@@ -40,6 +48,6 @@ export async function load({ params }) {
 	return {
 		post: sanitizedPost,
 		result,
-		author
+		author: authorWithAvatar
 	};
 }

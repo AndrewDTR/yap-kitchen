@@ -30,6 +30,7 @@
 </div>
 
 <svelte:head>
+	<link rel="icon" href={data.user.avatarUrl} sizes="any" type="image/svg+xml">
 	<meta property="og:title" content="{data.user.username} - yap.kitchen" />
 	{#if data.posts.length === 0}
 		<meta
@@ -52,9 +53,9 @@
 	{/if}
 	<meta property="og:url" content="https://www.yap.kitchen/{data.user.username}" />
 	<meta property="og:type" content="website" />
-	<!-- <meta property="og:image" content="https://www.yap.kitchen/{data.user.username}/avatar" />
+	<meta property="og:image" content={data.user.pngAvatarUrl} />
 	<meta property="og:image:width" content="300" />
-	<meta property="og:image:height" content="300" /> -->
+	<meta property="og:image:height" content="300" />
 	<meta name="theme-color" content={data.user.color} />
 </svelte:head>
 

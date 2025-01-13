@@ -5,7 +5,7 @@ import pb from '../../helper/superuser.js';
 export async function load({ params }) {
 	try {
 		const user = await pb.collection('users').getFirstListItem(`username = "${params.name}"`, {
-			fields: 'created, id, username, description, personal_link, avatar, color'
+			fields: 'created, id, username, description, personal_link, avatar, pngAvatar, color'
 		});
 
 		if (!user) {
@@ -17,6 +17,7 @@ export async function load({ params }) {
 		const userWithAvatar = {
 			...user,
 			avatarUrl: user.avatar ? pb.files.getURL(record, user.avatar) : null,
+			pngAvatarUrl: user.pngAvatar ? pb.files.getURL(record, user.pngAvatar) : null,
 			humanReadableCreated: format(new Date(user.created), 'MMMM do, yyyy')
 		};
 
