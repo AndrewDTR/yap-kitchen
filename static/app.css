@@ -57,17 +57,20 @@ h6 {
 
 @font-face {
 	font-family: 'Source Sans 3';
-	src: url('/fonts/SourceSans3-VariableFont_wght.ttf') format('truetype');
+	src: url('/fonts/SourceSans3-Regular.woff2') format('woff2');
 	font-weight: 100 900;
 	font-style: normal;
-}
-
-@font-face {
+	font-display: fallback;
+  }
+  
+  @font-face {
 	font-family: 'Source Sans 3';
-	src: url('/fonts/SourceSans3-Italic-VariableFont_wght.ttf') format('truetype');
+	src: url('/fonts/SourceSans3-Italic.woff2') format('woff2');
 	font-weight: 100 900;
 	font-style: italic;
-}
+	font-display: fallback;
+  }
+  
 
 :root {
 	--font-family-sans: 'Source Sans 3', sans-serif;
