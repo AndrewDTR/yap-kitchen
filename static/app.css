@@ -53,6 +53,9 @@ h4,
 h5,
 h6 {
 	text-wrap: balance;
+	line-height: 100%;
+	padding-top: 3px;
+	padding-bottom: 5px;
 }
 
 @font-face {

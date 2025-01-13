@@ -67,6 +67,6 @@
 
 	.user-posts {
 		padding: 1rem;
-		border: 1px solid #ddd;
+		border: 1px solid black;
 	}
 </style>

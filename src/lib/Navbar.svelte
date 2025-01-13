@@ -3,10 +3,6 @@
 	let color = $derived(page.data.user?.color || page.data.author?.color || '#123456');
 </script>
 
-<!-- something to consider. a nice looking gradient that adds some variety -->
-<!-- background: repeating-linear-gradient(45deg, #123456, #123456 20px, #1a2b3c 20px, #1a2b3c 40px);">
-	<div class="internal-nav -->
-
 <div class="bg-navbar" style="background-color: {color};">
 	<div class="internal-nav">
 		<nav>

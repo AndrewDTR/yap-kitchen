@@ -1,10 +1,15 @@
 <script>
+	import BlogHeader from '$lib/blog/BlogHeader.svelte';
 	let { data } = $props();
 </script>
 
 <div class="content">
-	<h1 class="title">{data.post.title}</h1>
-	<p><a href="/{data.author.username}">{data.author.username}</a> | {data.post.createdHumanReadable}</p>
+	<BlogHeader
+		title={data.post.title}
+		author={data.author.username}
+		date={data.post.createdHumanReadable}
+		color={data.author.color}
+	></BlogHeader>
 
 	<div>{@html data.result}</div>
 </div>
