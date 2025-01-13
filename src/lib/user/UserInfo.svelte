@@ -31,7 +31,7 @@
 	$: shadowColor = adjustColor(color, 0.7, 'darken');
 </script>
 
-<div class="hero" style="--user-color: {color};">
+<div class="hero" style="--user-color: {color}; --shadow-color: {shadowColor};">
 	<div class="pfp">
 		<img src={avatarUrl} alt="{username}'s pfp" />
 	</div>
@@ -41,11 +41,10 @@
 		<p class="description"><i>{description}</i></p>
 		<div class="color-showcase">
 			<div class="color-square"></div>
-			<p>their color is {color}</p>
+			<p>{color}</p>
 		</div>
 		{#if personal_link}
 			<p>
-				their personal link is
 				<a href={personal_link}>{personal_link}</a>
 			</p>
 		{/if}
@@ -57,7 +56,11 @@
 		display: flex;
 		align-items: stretch;
 		padding: 1rem;
-		border: 1px solid #ddd;
+		border-style: solid;
+		border-color: black;
+		border-width: 2px;
+		background-color: var(--user-color);
+		box-shadow: 7px 7px 0px var(--shadow-color);
 	}
 
 	.pfp {
@@ -72,6 +75,10 @@
 		height: 100%;
 		width: auto;
 		object-fit: cover;
+		border-style: solid;
+		border-color: black;
+		border-width: 2px;
+		box-shadow: 4px 4px 0px var(--shadow-color);
 	}
 
 	.info {
@@ -94,6 +101,9 @@
 		height: 10px;
 		background-color: var(--user-color);
 		flex-shrink: 0;
+		border-style: solid;
+		border-color: black;
+		border-width: 2px;
 	}
 
 	.color-showcase p {
