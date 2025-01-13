@@ -61,16 +61,15 @@ h6 {
 	font-weight: 100 900;
 	font-style: normal;
 	font-display: fallback;
-  }
-  
-  @font-face {
+}
+
+@font-face {
 	font-family: 'Source Sans 3';
 	src: url('/fonts/SourceSans3-Italic.woff2') format('woff2');
 	font-weight: 100 900;
 	font-style: italic;
 	font-display: fallback;
-  }
-  
+}
 
 :root {
 	--font-family-sans: 'Source Sans 3', sans-serif;
