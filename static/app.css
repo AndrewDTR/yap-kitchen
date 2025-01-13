@@ -95,3 +95,19 @@ p {
 		padding-inline: clamp(1rem, 5vw, 2rem);
 	}
 }
+
+a {
+	color: inherit;
+	text-decoration: underline;
+	text-decoration-color: black;
+	text-underline-offset: 2px;
+}
+
+a:visited {
+	color: inherit;
+}
+
+a:hover,
+a:focus {
+	text-decoration-color: black;
+}

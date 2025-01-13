@@ -1,7 +1,25 @@
 <script>
-	import Navbar from '$lib/Navbar.svelte';
+    import Footer from '$lib/Footer.svelte';
+    import Navbar from '$lib/Navbar.svelte';
+
+    let { data } = $props();
 </script>
 
-<Navbar />
+<style>
+    .page-wrapper {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+    .main-content {
+        flex: 1;
+    }
+</style>
 
-<slot></slot>
+<div class="page-wrapper">
+    <Navbar />
+    <div class="main-content">
+        <slot></slot>
+    </div>
+    <Footer commitHash={data.commitHash} environment={data.environment} />
+</div>
