@@ -16,4 +16,5 @@
 
 <svelte:head>
 	<link rel="icon" href={data.author.avatarUrl} sizes="any" type="image/svg+xml" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css" />
 </svelte:head>

@@ -1,9 +1,10 @@
 import { error } from '@sveltejs/kit';
 import markdownit from 'markdown-it';
+import mk from '@vscode/markdown-it-katex';
 import { format } from 'date-fns';
 import pb from '../../../helper/superuser.js';
 
-const md = markdownit();
+const md = markdownit().use(mk.default);
 
 export async function load({ params }) {
 	const user = await pb.collection('users').getFirstListItem(`username = "${params.name}"`);
