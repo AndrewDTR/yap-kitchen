@@ -1,4 +1,5 @@
 <script>
+	import BlogPost from '$lib/user/BlogPost.svelte';
 	import UserInfo from '$lib/user/UserInfo.svelte';
 	let { data } = $props();
 </script>
@@ -15,22 +16,24 @@
 	<div class="user-posts">
 		{#if data.posts.length > 0}
 			<h3>they have the following blog posts</h3>
-			<div class="posts">
-				{#each data.posts as post}
-					<p>
-						<a href="/{data.user.username}/{post.slug}">{post.title}</a>
-						- {post.humanReadableTime}
-					</p>
-				{/each}
-			</div>
 		{:else}
 			<h3>they have no blog posts :(</h3>
 		{/if}
 	</div>
+	<div class="posts">
+		{#each data.posts as post}
+			<BlogPost
+				title={post.title}
+				slug={post.slug}
+				author={data.user.username}
+				date={post.humanReadableTime}
+			></BlogPost>
+		{/each}
+	</div>
 </div>
 
 <svelte:head>
-	<link rel="icon" href={data.user.avatarUrl} sizes="any" type="image/svg+xml">
+	<link rel="icon" href={data.user.avatarUrl} sizes="any" type="image/svg+xml" />
 	<meta property="og:title" content="{data.user.username} - yap.kitchen" />
 	{#if data.posts.length === 0}
 		<meta

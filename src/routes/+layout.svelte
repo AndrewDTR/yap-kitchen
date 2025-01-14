@@ -27,7 +27,6 @@
 	let color = $derived(page.data.user?.color || page.data.author?.color || '#123456');
 
 	let shadowColor = $derived(adjustColor(color, 0.85, 'lighten'));
-    // let shadowColor = $derived('white');
 </script>
 
 <div class="page-wrapper" style="background-color: {shadowColor};">
