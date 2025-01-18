@@ -11,7 +11,7 @@
 		color={data.author.color}
 	></BlogHeader>
 
-	<div>{@html data.result}</div>
+	<div class="user-post">{@html data.result}</div>
 </div>
 
 <svelte:head>

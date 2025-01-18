@@ -4,7 +4,7 @@
 </script>
 
 <div class="content">
-	<h1>user directory</h1>
+	<h1>&#9658; user directory</h1>
 
 	<div class="user-list">
 		{#each data.users as user}

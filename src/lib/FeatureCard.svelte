@@ -1,8 +1,7 @@
 <script>
-	export let title = 'Title';
-	export let author = 'Author';
-	export let date = 'January 1st, 1900';
-	export let color = '#000000';
+	export let title = 'Name Placeholder';
+	export let description = 'Description Placeholder';
+	let color = '#FFFFFF';
 
 	function adjustColor(hex, factor, mode = 'lighten') {
 		let r = parseInt(hex.slice(1, 3), 16);
@@ -27,23 +26,46 @@
 
 	let shadowColor;
 	$: shadowColor = adjustColor(color, 0.7, 'darken');
+	$: clickColor = adjustColor(color, 0.5, 'lighten');
 </script>
 
-<div class="blog-header" style="--user-color: {color}; --shadow-color: {shadowColor};">
-	<h1 class="title">{title}</h1>
-	<p>
-		<a href="/{author}">{author}</a> | {date}
-	</p>
+<div
+	class="user"
+	style="
+		--base-color: {color};
+		--shadow-color: {shadowColor};
+		--click-color: {clickColor};
+	  "
+>
+	<div class="header">
+		<h2>{title}</h2>
+	</div>
+	<p>{description}</p>
 </div>
 
 <style>
-	.blog-header {
-		padding: 1rem;
+	.user {
 		border-style: solid;
 		border-color: black;
 		border-width: 2px;
-		background-color: var(--user-color);
-		box-shadow: 7px 7px 0px var(--shadow-color);
-		margin-bottom: 20px;
+		max-width: 500px;
+		padding: 7px;
+		background-color: var(--base-color);
+		box-shadow: 4px 4px 0px var(--shadow-color);
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		height: 100%;
+		gap: 0.5rem;
+	}
+
+	.header {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	h2 {
+		margin: 0;
 	}
 </style>

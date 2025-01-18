@@ -65,4 +65,8 @@
 	.internal-nav nav a:hover {
 		transform: rotate(4deg);
 	}
+
+	.internal-nav nav a:active {
+		color: rgb(177, 177, 177);
+	}
 </style>
