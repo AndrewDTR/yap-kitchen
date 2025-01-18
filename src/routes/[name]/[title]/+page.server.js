@@ -39,7 +39,6 @@ export async function load({ params }) {
 		id: post.id,
 		title: post.title,
 		slug: post.slug,
-		content: post.content,
 		created: post.created,
 		updated: post.updated,
 		createdHumanReadable: format(new Date(post.created), 'MMMM do, yyyy'),

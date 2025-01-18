@@ -32,7 +32,7 @@
 <div class="blog-header" style="--user-color: {color}; --shadow-color: {shadowColor};">
 	<h1 class="title">{title}</h1>
 	<p>
-		<a href="/{author}">{author}</a> | {date}
+		by <a href="/{author}">{author}</a> | {date}
 	</p>
 </div>
 
