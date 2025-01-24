@@ -1,6 +1,7 @@
 <script>
 	import { page } from '$app/state';
 	let color = $derived(page.data.user?.color || page.data.author?.color || '#123456');
+	let logUser = page.data.logUser;
 </script>
 
 <div class="bg-navbar" style="background-color: {color};">
@@ -9,7 +10,12 @@
 			<a href="/"><b>yap.kitchen 👨‍🍳</b></a>
 			<a href="/about">/about</a>
 			<a href="/users">/users</a>
-			<a href="/login" class="right">/login</a>
+
+			{#if logUser}
+				<a href="/{logUser.username}" class="right">/{logUser.username}</a>
+			{:else}
+				<a href="/login" class="right">/login</a>
+			{/if}
 		</nav>
 	</div>
 </div>
@@ -35,7 +41,6 @@
 		align-items: center;
 		width: 100%;
 		padding: 0.6em;
-		/* background-color: rgb(159, 116, 116); */
 		margin-bottom: 15px;
 	}
 

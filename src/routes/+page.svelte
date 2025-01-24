@@ -1,16 +1,27 @@
 <script>
 	import FeatureCard from '$lib/FeatureCard.svelte';
 	let { data } = $props();
+	let logUser = data.logUser;
 </script>
 
 <div class="content">
 	<div class="welcome">
-		<h1>welcome to yap.kitchen 👨‍🍳</h1>
+		{#if logUser}
+			<h1>welcome back to yap.kitchen 👨‍🍳</h1>
+		{:else}
+			<h1>welcome to yap.kitchen 👨‍🍳</h1>
+		{/if}
 		<p>serving <code>{data.userCount}</code> users posting <code>{data.postCount}</code> posts</p>
 		<div class="buttons">
-			<a href="/login">
-				<p>log in</p>
-			</a>
+			{#if logUser}
+				<a href="/{logUser.username}">
+					<p>your page</p>
+				</a>
+			{:else}
+				<a href="/login">
+					<p>log in</p>
+				</a>
+			{/if}
 
 			<a href="/users">
 				<p>view users</p>
@@ -20,15 +31,15 @@
 	<div class="feature-grid">
 		<FeatureCard
 			title="write about what interests you"
-			description="the web used to be about xyz. Now you're limited by 240 characterrs. here you've got like 5000 lol"
+			description="the web used to be about xyz. Now you're limited by 240 characters. here you've got like 5000 lol"
 		/>
 		<FeatureCard
 			title="rich text editor"
-			description="you can type your yap and have it look good"
+			description="you can type your yap and have it look good. supports vanilla markdown and katex for math notation"
 		/>
 		<FeatureCard
 			title="open source"
-			description="you can type your yap"
+			description="just markdown. nothing proprietary. run a yap kitchen instance if you'd like, or explore the source code"
 		/>
 	</div>
 </div>
@@ -76,7 +87,6 @@
 			transform 0.15s ease,
 			box-shadow 0.2s ease,
 			background-color 0.2s ease;
-			
 	}
 
 	.buttons p:hover {
