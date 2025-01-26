@@ -1,17 +1,53 @@
 <script>
-	function handleDiscordLogin() {
-		document.getElementById('result').textContent = 'Discord login triggered';
+	import { browser } from '$app/environment';
+	import PocketBase from 'pocketbase';
+
+	const pb = new PocketBase('http://127.0.0.1:8090/');
+
+	async function handleDiscordLogin() {
+		const authData = await pb.collection('users').authWithOAuth2({ provider: 'discord' });
+		console.log(authData);
+
+		console.log(pb.authStore.isValid);
+		console.log(pb.authStore.token);
+		console.log(pb.authStore.record.id);
 	}
 
-	function handleGoogleLogin() {
-		document.getElementById('result').textContent = 'Google login triggered';
+	async function loginWithDiscord() {
+		if (!browser) return;
+
+		const popup = window.open(
+			'about:blank',
+			'discord_oauth_popup',
+			'width=700,height=800,left=100,top=100'
+		);
+
+		const authData = await pb.collection('users').authWithOAuth2({
+			provider: 'discord',
+			urlCallback: (oauthUrl) => {
+				if (popup) {
+					popup.location.href = oauthUrl;
+				}
+			}
+		});
+
+		document.cookie = `pb_auth=${JSON.stringify({
+			token: authData.token,
+			model: authData.record
+		})}; path=/;`;
+
+		location.reload();
+	}
+
+	async function handleGitHubLogin() {
+		const authData = await pb.collection('users').authWithOAuth2({ provider: 'github' });
 	}
 </script>
 
 <div class="content">
 	<h1>Here's where you can log in</h1>
-	<button on:click={handleDiscordLogin}>Login with Discord</button>
-	<button on:click={handleGoogleLogin}>Login with Google</button>
+	<button on:click={loginWithDiscord}>Login with Discord</button>
+	<button on:click={handleGitHubLogin}>Login with GitHub</button>
 
 	<form action="?/login" method="post">
 		<div>

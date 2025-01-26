@@ -12,9 +12,8 @@ function base64ToBlob(base64, mimeType) {
 
 
 export async function load({ locals }) {
-	console.log(locals.pb.authStore.model);
 	if (locals.pb.authStore.model) {
-		return redirect(303, `/${username}`)
+		return redirect(303, `/${locals.pb.authStore.model.username}`)
 	}
 
 	return {};
