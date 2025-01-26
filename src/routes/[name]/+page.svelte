@@ -29,7 +29,7 @@
 		humanReadableCreated={data.user.humanReadableCreated}
 		personal_link={data.user.personal_link}
 	></UserInfo>
-	{#if data.logUser}
+	{#if data.logUser && data.logUser.username == data.user.username}
 		<button on:click={logout}>log out</button>
 	{/if}
 	<div class="user-posts">
