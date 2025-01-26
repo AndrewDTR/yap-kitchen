@@ -20,6 +20,7 @@ export async function load({ locals }) {
 }
 
 export const actions = {
+
 	register: async ({ fetch, locals, request }) => {
 		const data = await request.formData();
 		const email = data.get('email');

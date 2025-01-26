@@ -1,7 +1,23 @@
 <script>
 	import BlogPost from '$lib/user/BlogPost.svelte';
 	import UserInfo from '$lib/user/UserInfo.svelte';
+	import PocketBase from 'pocketbase';
+
+	const pb = new PocketBase('http://127.0.0.1:8090/');
+
 	let { data } = $props();
+
+	async function logout() {
+		pb.authStore.clear();
+
+		const res = await fetch('/logout', { method: 'POST' });
+
+		if (res.ok) {
+			window.location.href = '/login';
+		} else {
+			console.error('Logout failed', await res.text());
+		}
+	}
 </script>
 
 <div class="content">
@@ -13,6 +29,9 @@
 		humanReadableCreated={data.user.humanReadableCreated}
 		personal_link={data.user.personal_link}
 	></UserInfo>
+	{#if data.logUser}
+		<button on:click={logout}>log out</button>
+	{/if}
 	<div class="user-posts">
 		{#if data.posts.length > 0}
 			<h3>they have the following blog posts</h3>
