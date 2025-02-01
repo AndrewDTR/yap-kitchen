@@ -1,5 +1,6 @@
 <script>
 	import BlogHeader from '$lib/blog/BlogHeader.svelte';
+	import Button from '$lib/Button.svelte';
 	let { data } = $props();
 </script>
 
@@ -8,9 +9,24 @@
 		title={data.post.title}
 		author={data.author.username}
 		date={data.post.createdHumanReadable}
+		editedDate={data.post.updatedHumanReadable}
 		color={data.author.color}
 	></BlogHeader>
 
+	{#if data.logUser && data.logUser.username == data.author.username}
+		<div class="button-bar">
+			<Button
+				href="/{data.author.username}/{data.post.slug}/edit"
+				text="edit post"
+				color={data.author.color}
+			/>
+			<Button
+				href="/{data.author.username}/{data.post.slug}/delete"
+				text="delete post"
+				color={data.author.color}
+			/>
+		</div>
+	{/if}
 	<div class="user-post">{@html data.result}</div>
 </div>
 
@@ -28,3 +44,14 @@
 	<meta property="og:image:height" content="300" /> -->
 	<meta name="theme-color" content={data.author.color} />
 </svelte:head>
+
+<style>
+	.button-bar {
+		display: flex;
+		gap: 1rem;
+	}
+
+	.button-bar :global(.main) {
+		flex: 1 1 0;
+	}
+</style>

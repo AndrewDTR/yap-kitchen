@@ -1,4 +1,5 @@
 <script>
+	import Button from '$lib/Button.svelte';
 	import BlogPost from '$lib/user/BlogPost.svelte';
 	import UserInfo from '$lib/user/UserInfo.svelte';
 	import PocketBase from 'pocketbase';
@@ -18,6 +19,8 @@
 			console.error('Logout failed', await res.text());
 		}
 	}
+
+	let reversedPosts = [...data.posts].reverse();
 </script>
 
 <div class="content">
@@ -30,17 +33,28 @@
 		personal_link={data.user.personal_link}
 	></UserInfo>
 	{#if data.logUser && data.logUser.username == data.user.username}
-		<button on:click={logout}>log out</button>
+		<!-- <button on:click={logout}>log out</button> -->
+		<div class="button-bar">
+			<Button href="/post" text="post" />
+			<Button text="edit profile" href="/{data.user.username}/edit" color={data.user.color} />
+			<Button on:click={logout} text="logout" />
+		</div>
 	{/if}
 	<div class="user-posts">
-		{#if data.posts.length > 0}
-			<h3>they have the following blog posts</h3>
+		{#if !data.logUser || data.logUser.username != data.user.username}
+			{#if data.posts.length > 0}
+				<h3>they have the following blog posts</h3>
+			{:else}
+				<h3>they have no blog posts :(</h3>
+			{/if}
+		{:else if data.posts.length > 0}
+			<h3>you have the following blog posts</h3>
 		{:else}
-			<h3>they have no blog posts :(</h3>
+			<h3>you have no blog posts :(</h3>
 		{/if}
 	</div>
 	<div class="posts">
-		{#each data.posts as post}
+		{#each reversedPosts as post}
 			<BlogPost
 				title={post.title}
 				slug={post.slug}
@@ -82,6 +96,15 @@
 </svelte:head>
 
 <style>
+	.button-bar {
+		display: flex;
+		gap: 1rem;
+	}
+
+	.button-bar :global(.main) {
+		flex: 1 1 0;
+	}
+
 	.content {
 		display: flex;
 		flex-direction: column;
@@ -90,6 +113,6 @@
 
 	.user-posts {
 		padding: 1rem;
-		border: 1px solid black;
+		border: 1.5px solid black;
 	}
 </style>

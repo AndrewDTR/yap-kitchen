@@ -1,21 +1,18 @@
 <script>
-	let { data } = $props();
 </script>
 
 <div class="content">
-	<form method="POST" action="?/edit">
-		<input type="hidden" name="id" value={data.post.id} />
-
-		<h1>Editing "{data.post.title}"</h1>
+	<form method="POST" action="?/post">
+		<h1>Make a post</h1>
 
 		<p>Title</p>
-		<input type="text" name="title" value={data.post.title} />
+		<input type="text" name="title" />
 
 		<p>Slug</p>
-		<input type="text" name="slug" value={data.post.slug} />
+		<input type="text" name="slug" />
 
 		<p>Content</p>
-		<textarea name="content" id="post-content">{data.post.content}</textarea>
+		<textarea name="content" id="post-content"></textarea>
 
 		<button type="submit">Submit</button>
 	</form>

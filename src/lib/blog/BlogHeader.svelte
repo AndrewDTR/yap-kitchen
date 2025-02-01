@@ -2,6 +2,7 @@
 	export let title = 'Title';
 	export let author = 'Author';
 	export let date = 'January 1st, 1900';
+	export let editedDate;
 	export let color = '#000000';
 
 	function adjustColor(hex, factor, mode = 'lighten') {
@@ -32,7 +33,10 @@
 <div class="blog-header" style="--user-color: {color}; --shadow-color: {shadowColor};">
 	<h1 class="title">{title}</h1>
 	<p>
-		by <a href="/{author}">{author}</a> | {date}
+		by <a href="/{author}">{author}</a> | posted {date}
+		{#if editedDate && editedDate != date}
+			| last edited {editedDate}
+		{/if}
 	</p>
 </div>
 

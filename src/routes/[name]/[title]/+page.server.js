@@ -20,7 +20,7 @@ export async function load({ params }) {
 		throw error(404, 'Post not found');
 	}
 
-	const result = md.render(post.content);
+	const result = md.render("---\n" + post.content);
 
 	const author = {
 		username: post.expand?.author?.username,
