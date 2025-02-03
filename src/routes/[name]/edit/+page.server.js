@@ -1,9 +1,6 @@
 import { redirect, error } from '@sveltejs/kit';
 import pb from '../../../helper/superuser.js';
 
-import { redirect, error } from '@sveltejs/kit';
-import pb from '../../../helper/superuser.js';
-
 export const actions = {
     edit: async ({ locals, request, fetch }) => {
         const formData = await request.formData();
