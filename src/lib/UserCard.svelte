@@ -100,7 +100,6 @@
 		display: flex;
 		align-items: center;
 		gap: 0.5rem;
-		
 	}
 
 	h2 {
@@ -114,5 +113,9 @@
 		object-fit: cover;
 		border: 2px solid black;
 		box-shadow: 2px 2px 0px var(--shadow-color);
+	}
+
+	.user p {
+		word-break: break-all;
 	}
 </style>

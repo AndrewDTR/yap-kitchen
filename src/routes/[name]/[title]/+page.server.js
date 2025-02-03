@@ -7,15 +7,27 @@ import pb from '../../../helper/superuser.js';
 const md = markdownit().use(mk.default);
 
 export async function load({ params }) {
-	const user = await pb.collection('users').getFirstListItem(`username = "${params.name}"`);
+	let user;
+	try {
+		user = await pb.collection('users').getFirstListItem(`username = "${params.name}"`);
+	} catch (err) {
+		error(404, "That user doesn't exist.");
+	}
+
 	if (!user) {
 		throw error(404, 'User not found');
 	}
 
-	const post = await pb
-		.collection('posts')
-		.getFirstListItem(`author = "${user.id}" && slug = "${params.title}"`, { expand: 'author' });
+	let post;
 
+	try {
+		post = await pb
+			.collection('posts')
+			.getFirstListItem(`author = "${user.id}" && slug = "${params.title}"`, { expand: 'author' });
+
+	} catch (err) {
+		throw error(404, "Blog post does not exist.");
+	}
 	if (!post) {
 		throw error(404, 'Post not found');
 	}

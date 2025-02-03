@@ -32,7 +32,7 @@
 		humanReadableCreated={data.user.humanReadableCreated}
 		personal_link={data.user.personal_link}
 	></UserInfo>
-	{#if data.logUser && data.logUser.username == data.user.username}
+	{#if data.logUser && data.logUser.username === data.user.username}
 		<!-- <button on:click={logout}>log out</button> -->
 		<div class="button-bar">
 			<Button href="/post" text="post" />
@@ -41,7 +41,7 @@
 		</div>
 	{/if}
 	<div class="user-posts">
-		{#if !data.logUser || data.logUser.username != data.user.username}
+		{#if !data.logUser || data.logUser.username !== data.user.username}
 			{#if data.posts.length > 0}
 				<h3>they have the following blog posts</h3>
 			{:else}

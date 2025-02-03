@@ -49,6 +49,7 @@
 	.button-bar {
 		display: flex;
 		gap: 1rem;
+		margin-bottom: 15px;
 	}
 
 	.button-bar :global(.main) {

@@ -1,4 +1,5 @@
 <script>
+	import Button from '$lib/Button.svelte';
 	let { data } = $props();
 </script>
 
@@ -17,7 +18,9 @@
 		<p>Content</p>
 		<textarea name="content" id="post-content">{data.post.content}</textarea>
 
-		<button type="submit">Submit</button>
+		<div class="button-padding" type="submit">
+			<Button color={data.logUser.color} text="edit"></Button>
+		</div>
 	</form>
 </div>
 

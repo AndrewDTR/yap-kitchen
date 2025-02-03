@@ -36,7 +36,7 @@ export async function load({ params }) {
 		return { user: userWithAvatar, posts: formattedPosts };
 	} catch (err) {
 		if (err.status == 404) {
-			error(404);
+			error(404, "That user doesn't exist.");
 		}
 		throw err;
 	}
