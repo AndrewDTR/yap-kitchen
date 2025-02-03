@@ -6,11 +6,11 @@ export const actions = {
         const formData = await request.formData();
         const username = formData.get('username').toLowerCase();
         const description = formData.get('description');
-        const link = formData.get('link');
+        const color = formData.get('color');
+        const personal_link = formData.get('personal-link');
 
         console.log('username:', username);
         console.log('description:', description);
-        console.log('link:', link);
 
         if (!locals.pb.authStore.isValid) {
             throw error(401, 'Not logged in');
@@ -21,21 +21,16 @@ export const actions = {
         const data = {
             username,
             description,
-            link
+            personal_link,
+            color,
+            avatar: '',
+            pngAvatar: ''
         };
+
+        console.log(color);
 
         try {
             await pb.collection('users').update(locals.pb.authStore.model.id, data);
-
-            const identiconFormData = new FormData();
-            identiconFormData.set('username', username);
-            identiconFormData.set('color', locals.pb.authStore.model.color);
-
-            await fetch('/api/pfp', {
-                method: 'POST',
-                body: identiconFormData
-            });
-
         } catch (err) {
             throw error(500, 'Update failed: ' + err);
         }

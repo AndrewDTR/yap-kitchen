@@ -33,6 +33,7 @@ export async function handle({ event, resolve }) {
 
 			const identiconFormData = new FormData();
 			identiconFormData.set('username', event.locals.pb.authStore.model.username);
+			identiconFormData.set('color', event.locals.pb.authStore.model.color)
 
 			const identiconResponse = await event.fetch('/api/pfp', {
 				method: 'POST',
@@ -55,7 +56,6 @@ export async function handle({ event, resolve }) {
 			const data = new FormData();
 			data.set('avatar', svgBlob, 'avatar.svg');
 			data.set('pngAvatar', pngBlob, 'avatar.png');
-			data.set('color', '#cccccc');
 
 			try {
 				await pb.collection('users').update(userId, data);

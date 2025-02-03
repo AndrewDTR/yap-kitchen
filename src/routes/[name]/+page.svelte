@@ -35,9 +35,9 @@
 	{#if data.logUser && data.logUser.username === data.user.username}
 		<!-- <button on:click={logout}>log out</button> -->
 		<div class="button-bar">
-			<Button href="/post" text="post" />
+			<Button href="/post" text="post" color={data.user.color} />
 			<Button text="edit profile" href="/{data.user.username}/edit" color={data.user.color} />
-			<Button on:click={logout} text="logout" />
+			<Button on:click={logout} text="logout" color={data.user.color} />
 		</div>
 	{/if}
 	<div class="user-posts">

@@ -12,11 +12,14 @@
 		<p>Description</p>
 		<input type="text" name="description" value={data.logUser.description} maxlength="100" />
 
+		<p>Color</p>
+		<input type="text" name="color" value={data.logUser.color} />
+
 		<p>Link</p>
 		<input type="text" name="personal-link" value={data.logUser.personal_link} />
 
 		<div class="button-padding" type="submit">
-			<Button color={data.logUser.color} text="edit"></Button>
+			<Button color={data.logUser.color} text="submit"></Button>
 		</div>
 	</form>
 </div>
@@ -28,5 +31,9 @@
 		padding: 10px;
 		font-size: 16px;
 		margin-bottom: 15px;
+	}
+
+	.button-padding {
+		margin-top: 5px;
 	}
 </style>
