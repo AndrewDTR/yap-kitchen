@@ -118,4 +118,10 @@
 	.user p {
 		word-break: break-all;
 	}
+
+	.user h2 {
+		overflow-wrap: normal;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
 </style>

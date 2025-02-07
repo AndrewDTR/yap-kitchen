@@ -1,6 +1,6 @@
 import PocketBase from 'pocketbase';
 import { env } from '$env/dynamic/private';
-import { fail } from '@sveltejs/kit';
+import { error, fail } from '@sveltejs/kit';
 import pb from '../src/helper/superuser';
 
 function base64ToBlob(base64, mimeType) {
@@ -25,6 +25,18 @@ export async function handle({ event, resolve }) {
 	} catch (_) {
 		// clear the auth store on failed refresh
 		event.locals.pb.authStore.clear();
+	}
+
+	if (event.locals.pb.authStore.isValid && event.locals.pb.authStore.model.color == '') {
+		const data = new FormData();
+		data.set('color', "#cccccc");
+		try {
+			await pb.collection('users').update(event.locals.pb.authStore.model.id, data);
+		} catch (err) {
+			throw error(500, {
+				message: err.data.message
+			});
+		}
 	}
 
 	if (event.url.pathname !== '/api/pfp') {
@@ -59,12 +71,10 @@ export async function handle({ event, resolve }) {
 
 			try {
 				await pb.collection('users').update(userId, data);
-			} catch (error) {
-				console.log("issue 2")
+			} catch (err) {
 				console.log(error);
-				return fail(500, {
-					fail: true,
-					message: error.data.message
+				throw error(500, {
+					message: err.data.message
 				});
 			}
 		}
