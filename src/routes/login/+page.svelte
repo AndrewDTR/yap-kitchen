@@ -2,6 +2,8 @@
 	import { browser } from '$app/environment';
 	import PocketBase from 'pocketbase';
 	import { env } from '$env/dynamic/public';
+	import { goto } from '$app/navigation';
+	import { redirect } from '@sveltejs/kit';
 
 	const pb = new PocketBase(env.PUBLIC_POCKETBASE_URL ?? 'http://127.0.0.1:8090/');
 
@@ -14,15 +16,17 @@
 		loadingProvider = provider;
 
 		if (provider === 'discord') {
-			pb.collection('users').authWithOAuth2({
+			await pb.collection('users').authWithOAuth2({
 				provider: 'discord'
 			});
+			redirect(307, '/');
 		}
 
 		if (provider === 'github') {
-			pb.collection('users').authWithOAuth2({
+			await pb.collection('users').authWithOAuth2({
 				provider: 'github'
 			});
+			redirect(307, '/');
 		}
 		// error = '';
 		// success = '';
