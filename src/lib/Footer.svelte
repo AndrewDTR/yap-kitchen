@@ -9,7 +9,7 @@
 		<p>
 			{environment}@<a
 				href="https://github.com/AndrewDTR/yap-kitchen/commit/{commitHash}"
-				target="_blank">{commitHash}</a
+				target="_blank">{commitHash.substring(0, 5)}</a
 			>
 		</p>
 	</footer>
@@ -28,7 +28,6 @@
 
 	a {
 		text-decoration-color: white;
-
 	}
 
 	a:visited {
