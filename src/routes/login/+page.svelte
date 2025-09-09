@@ -51,32 +51,22 @@
 	<div
 		class="card"
 		style="
-			--base-color: #8eb9ed;
-			--shadow-color: #7393e3;
-			--ink: #000;
-		"
+				--base-color: #8eb9ed;
+				--shadow-color: #7393e3;
+				--ink: #000;
+			"
 	>
 		<h1 class="title">log in to yap.kitchen 👨‍🍳</h1>
 		<div class="oauth-grid">
-			<!-- <button
-				class="btn oauth discord"
-				on:click={() => oauthLogin('discord')}
-				disabled={!!loadingProvider}
-				aria-busy={loadingProvider === 'discord'}
-			>
-				<span>{loadingProvider === 'discord' ? 'Connecting…' : 'Continue with Discord'}</span>
+			<button class="btn oauth discord" on:click={loginWithDiscord}>
+				<span>{'Continue with Discord'}</span>
 			</button>
 
-			<button
-				class="btn oauth github"
-				on:click={() => oauthLogin('github')}
-				disabled={!!loadingProvider}
-				aria-busy={loadingProvider === 'github'}
-			>
-				<span>{loadingProvider === 'github' ? 'Connecting…' : 'Continue with GitHub'}</span>
-			</button> -->
-			<button on:click={loginWithDiscord}>Login with Discord</button>
-			<button on:click={handleGitHubLogin}>Login with GitHub</button>
+			<button class="btn oauth github" on:click={handleGitHubLogin}>
+				<span>{'Continue with GitHub'}</span>
+			</button>
+			<!-- <button on:click={loginWithDiscord}>Login with Discord</button>
+				<button on:click={handleGitHubLogin}>Login with GitHub</button> -->
 		</div>
 
 		<div class="divider" role="separator" aria-label="or email/password"><span>or</span></div>
@@ -122,11 +112,11 @@
 		</form>
 
 		<!-- {#if error}
-			<p class="msg error" role="alert" aria-live="polite">{error}</p>
-		{/if}
-		{#if success}
-			<p class="msg success" aria-live="polite">{success}</p>
-		{/if} -->
+				<p class="msg error" role="alert" aria-live="polite">{error}</p>
+			{/if}
+			{#if success}
+				<p class="msg success" aria-live="polite">{success}</p>
+			{/if} -->
 	</div>
 </div>
 
@@ -194,11 +184,6 @@
 		box-shadow: 0 0 0 rgb(76, 98, 137);
 		transform: translate(2px, 2px);
 		background-color: rgb(127, 152, 196);
-	}
-
-	.btn[disabled] {
-		opacity: 0.6;
-		pointer-events: none;
 	}
 
 	.btn.primary {
@@ -287,18 +272,6 @@
 		gap: 10px;
 		justify-content: center;
 		margin-top: 8px;
-	}
-
-	.msg {
-		margin: 0;
-		text-align: center;
-		font-weight: 600;
-	}
-	.msg.error {
-		color: #7a1111;
-	}
-	.msg.success {
-		color: #0b4f1a;
 	}
 
 	@media (max-width: 700px) {

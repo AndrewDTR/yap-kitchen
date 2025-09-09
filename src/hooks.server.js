@@ -1,5 +1,5 @@
 import PocketBase from 'pocketbase';
-import { env } from '$env/dynamic/private';
+import { env } from '$env/dynamic/public';
 import { error, fail } from '@sveltejs/kit';
 import pb from '../src/helper/superuser';
 
@@ -22,6 +22,7 @@ export async function handle({ event, resolve }) {
 	try {
 		// get an up-to-date auth store state by verifying and refreshing the loaded auth model (if any)
 		event.locals.pb.authStore.isValid && (await event.locals.pb.collection('users').authRefresh());
+	// eslint-disable-next-line no-unused-vars
 	} catch (_) {
 		// clear the auth store on failed refresh
 		event.locals.pb.authStore.clear();
