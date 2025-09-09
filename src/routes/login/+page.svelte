@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
 	import PocketBase from 'pocketbase';
+	import { env } from '$env/dynamic/private';
 
-	const pb = new PocketBase(import.meta.env.VITE_PB_URL ?? 'http://127.0.0.1:8090/');
+	const pb = new PocketBase(env.POCKETBASE_URL ?? 'http://127.0.0.1:8090/');
 
 	let loadingProvider: '' | 'discord' | 'github' = '';
 	let error = '';
