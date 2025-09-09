@@ -19,14 +19,14 @@
 			await pb.collection('users').authWithOAuth2({
 				provider: 'discord'
 			});
-			redirect(307, '/');
+			throw redirect(307, '/');
 		}
 
 		if (provider === 'github') {
 			await pb.collection('users').authWithOAuth2({
 				provider: 'github'
 			});
-			redirect(307, '/');
+			throw redirect(307, '/');
 		}
 		// error = '';
 		// success = '';
