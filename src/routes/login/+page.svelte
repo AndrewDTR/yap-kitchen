@@ -7,50 +7,43 @@
 
 	const pb = new PocketBase(env.PUBLIC_POCKETBASE_URL ?? 'http://127.0.0.1:8090/');
 
-	let loadingProvider: '' | 'discord' | 'github' = '';
-	let error = '';
-	let success = '';
+	async function handleDiscordLogin() {
+		const authData = await pb.collection('users').authWithOAuth2({ provider: 'discord' });
+		console.log(authData);
 
-	async function oauthLogin(provider: 'discord' | 'github') {
+		console.log(pb.authStore.isValid);
+		console.log(pb.authStore.token);
+		console.log(pb.authStore.record.id);
+	}
+
+	async function loginWithDiscord() {
 		if (!browser) return;
-		loadingProvider = provider;
 
-		if (provider === 'discord') {
-			await pb.collection('users').authWithOAuth2({
-				provider: 'discord'
-			});
-			throw redirect(307, '/');
-		}
+		const popup = window.open(
+			'about:blank',
+			'discord_oauth_popup',
+			'width=700,height=800,left=100,top=100'
+		);
 
-		if (provider === 'github') {
-			await pb.collection('users').authWithOAuth2({
-				provider: 'github'
-			});
-			throw redirect(307, '/');
-		}
-		// error = '';
-		// success = '';
+		const authData = await pb.collection('users').authWithOAuth2({
+			provider: 'discord',
+			urlCallback: (oauthUrl) => {
+				if (popup) {
+					popup.location.href = oauthUrl;
+				}
+			}
+		});
 
-		// const popup = window.open(
-		// 	'about:blank',
-		// 	'oauth_popup',
-		// 	'width=700,height=800,left=100,top=100'
-		// );
+		document.cookie = `pb_auth=${JSON.stringify({
+			token: authData.token,
+			model: authData.record
+		})}; path=/;`;
 
-		// try {
-		// 	const authData = await pb.collection('users').authWithOAuth2({
-		// 		provider,
-		// 		urlCallback: (oauthUrl: string) => {
-		// 			if (popup) popup.location.href = oauthUrl;
-		// 		}
-		// 	});
+		location.reload();
+	}
 
-		// } catch (e: any) {
-		// 	error = e?.message ?? 'Login failed. Please try again.';
-		// } finally {
-		// 	loadingProvider = '';
-		// 	if (popup && !popup.closed) popup.close();
-		// }
+	async function handleGitHubLogin() {
+		const authData = await pb.collection('users').authWithOAuth2({ provider: 'github' });
 	}
 </script>
 
@@ -65,7 +58,7 @@
 	>
 		<h1 class="title">log in to yap.kitchen 👨‍🍳</h1>
 		<div class="oauth-grid">
-			<button
+			<!-- <button
 				class="btn oauth discord"
 				on:click={() => oauthLogin('discord')}
 				disabled={!!loadingProvider}
@@ -81,7 +74,9 @@
 				aria-busy={loadingProvider === 'github'}
 			>
 				<span>{loadingProvider === 'github' ? 'Connecting…' : 'Continue with GitHub'}</span>
-			</button>
+			</button> -->
+			<button on:click={loginWithDiscord}>Login with Discord</button>
+			<button on:click={handleGitHubLogin}>Login with GitHub</button>
 		</div>
 
 		<div class="divider" role="separator" aria-label="or email/password"><span>or</span></div>
@@ -126,12 +121,12 @@
 			</div>
 		</form>
 
-		{#if error}
+		<!-- {#if error}
 			<p class="msg error" role="alert" aria-live="polite">{error}</p>
 		{/if}
 		{#if success}
 			<p class="msg success" aria-live="polite">{success}</p>
-		{/if}
+		{/if} -->
 	</div>
 </div>
 
