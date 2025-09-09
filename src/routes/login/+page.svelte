@@ -7,15 +7,6 @@
 
 	const pb = new PocketBase(env.PUBLIC_POCKETBASE_URL ?? 'http://127.0.0.1:8090/');
 
-	async function handleDiscordLogin() {
-		const authData = await pb.collection('users').authWithOAuth2({ provider: 'discord' });
-		console.log(authData);
-
-		console.log(pb.authStore.isValid);
-		console.log(pb.authStore.token);
-		console.log(pb.authStore.record.id);
-	}
-
 	async function loginWithDiscord() {
 		if (!browser) return;
 
@@ -45,6 +36,32 @@
 	async function handleGitHubLogin() {
 		const authData = await pb.collection('users').authWithOAuth2({ provider: 'github' });
 	}
+
+	async function loginWithGitHub() {
+		if (!browser) return;
+
+		const popup = window.open(
+			'about:blank',
+			'github_oauth_popup',
+			'width=700,height=800,left=100,top=100'
+		);
+
+		const authData = await pb.collection('users').authWithOAuth2({
+			provider: 'github',
+			urlCallback: (oauthUrl) => {
+				if (popup) {
+					popup.location.href = oauthUrl;
+				}
+			}
+		});
+
+		document.cookie = `pb_auth=${JSON.stringify({
+			token: authData.token,
+			model: authData.record
+		})}; path=/;`;
+
+		location.reload();
+	}
 </script>
 
 <div class="auth-page">
@@ -62,7 +79,7 @@
 				<span>{'Continue with Discord'}</span>
 			</button>
 
-			<button class="btn oauth github" on:click={handleGitHubLogin}>
+			<button class="btn oauth github" on:click={loginWithGitHub}>
 				<span>{'Continue with GitHub'}</span>
 			</button>
 			<!-- <button on:click={loginWithDiscord}>Login with Discord</button>
