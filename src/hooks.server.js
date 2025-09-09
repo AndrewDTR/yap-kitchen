@@ -14,7 +14,7 @@ function base64ToBlob(base64, mimeType) {
 }
 
 export async function handle({ event, resolve }) {
-	event.locals.pb = new PocketBase(env.POCKETBASE_URL);
+	event.locals.pb = new PocketBase(env.PUBLIC_POCKETBASE_URL);
 
 	// load the store data from the request cookie string
 	event.locals.pb.authStore.loadFromCookie(event.request.headers.get('cookie') || '');
