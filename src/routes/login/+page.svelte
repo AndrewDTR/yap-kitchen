@@ -11,6 +11,7 @@
 
 	async function oauthLogin(provider: 'discord' | 'github') {
 		if (!browser) return;
+		loadingProvider = provider;
 
 		if (provider === 'discord') {
 			pb.collection('users').authWithOAuth2({
@@ -25,7 +26,6 @@
 		}
 		// error = '';
 		// success = '';
-		// loadingProvider = provider;
 
 		// const popup = window.open(
 		// 	'about:blank',
