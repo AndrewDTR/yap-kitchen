@@ -22,7 +22,7 @@ export const actions = {
         try {
             const data = {
                 "title": title,
-                "slug": slug,
+                "slug": encodeURIComponent(slug.toLowerCase()),
                 "content": content,
                 "author": locals.pb.authStore.model.id
             };
