@@ -13,7 +13,13 @@
 		<input type="text" name="description" value={data.logUser.description} maxlength="100" />
 
 		<p>Color</p>
-		<input type="text" name="color" value={data.logUser.color} />
+		<input
+			type="text"
+			name="color"
+			value={data.logUser.color}
+			placeholder="#rrggbb"
+			inputmode="text"
+		/>
 
 		<p>Link</p>
 		<input type="text" name="personal-link" value={data.logUser.personal_link} />

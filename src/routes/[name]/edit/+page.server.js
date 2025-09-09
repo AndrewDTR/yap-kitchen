@@ -2,11 +2,11 @@ import { redirect, error } from '@sveltejs/kit';
 import pb from '../../../helper/superuser.js';
 
 export const actions = {
-    edit: async ({ locals, request, fetch }) => {
+    edit: async ({ locals, request }) => {
         const formData = await request.formData();
         const username = formData.get('username').toLowerCase();
         const description = formData.get('description');
-        const color = formData.get('color');
+        let color = formData.get('color');
         const personal_link = formData.get('personal-link');
 
         console.log('username:', username);
@@ -18,16 +18,23 @@ export const actions = {
 
         // TODO VERIFY OWNERSHIP OF ACCOUNT
 
+        if (typeof color !== 'string') {
+            throw error(400, 'Color is required');
+        }
+        color = color.trim();
+        if (!/^#[0-9A-Fa-f]{6}$/.test(color)) {
+            throw error(400, 'Invalid color format');
+        }
+        const normalizedColor = color.toLowerCase();
+
         const data = {
             username,
             description,
             personal_link,
-            color,
+            color: normalizedColor,
             avatar: '',
             pngAvatar: ''
         };
-
-        console.log(color);
 
         try {
             await pb.collection('users').update(locals.pb.authStore.model.id, data);

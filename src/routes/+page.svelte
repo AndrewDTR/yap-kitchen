@@ -31,15 +31,16 @@
 	<div class="feature-grid">
 		<FeatureCard
 			title="write about what interests you"
-			description="the web used to be about xyz. Now you're limited by 240 characters. here you've got like 5000 lol"
+			description="long-form posts with no character caps. as long as you can put it in a text box..."
 		/>
-		<FeatureCard
-			title="rich text editor"
-			description="you can type your yap and have it look good. supports vanilla markdown and katex for math notation"
-		/>
+		<FeatureCard title="rich text editor" description="supports markdown and katex for math." />
 		<FeatureCard
 			title="open source"
-			description="just markdown. nothing proprietary. run a yap kitchen instance if you'd like, or explore the source code"
+			description="just markdown. nothing proprietary. run your own instance if you'd like, or read the source"
+		/>
+		<FeatureCard
+			title="fast and minimal"
+			description="quick to load and (relatively) easy to read. no ads & no tracking"
 		/>
 	</div>
 </div>
