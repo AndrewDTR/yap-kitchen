@@ -12,37 +12,41 @@
 	async function oauthLogin(provider: 'discord' | 'github') {
 		if (!browser) return;
 
-		error = '';
-		success = '';
-		loadingProvider = provider;
-
-		const popup = window.open(
-			'about:blank',
-			'oauth_popup',
-			'width=700,height=800,left=100,top=100'
-		);
-
-		try {
-			const authData = await pb.collection('users').authWithOAuth2({
-				provider,
-				urlCallback: (oauthUrl: string) => {
-					if (popup) popup.location.href = oauthUrl;
-				}
+		if (provider === 'discord') {
+			pb.collection('users').authWithOAuth2({
+				provider: 'discord'
 			});
-
-			document.cookie = `pb_auth=${JSON.stringify({
-				token: authData.token,
-				model: authData.record
-			})}; path=/; SameSite=Lax;`;
-
-			success = 'Logged in! Redirecting…';
-			location.reload();
-		} catch (e: any) {
-			error = e?.message ?? 'Login failed. Please try again.';
-		} finally {
-			loadingProvider = '';
-			if (popup && !popup.closed) popup.close();
 		}
+
+		if (provider === 'github') {
+			pb.collection('users').authWithOAuth2({
+				provider: 'github'
+			});
+		}
+		// error = '';
+		// success = '';
+		// loadingProvider = provider;
+
+		// const popup = window.open(
+		// 	'about:blank',
+		// 	'oauth_popup',
+		// 	'width=700,height=800,left=100,top=100'
+		// );
+
+		// try {
+		// 	const authData = await pb.collection('users').authWithOAuth2({
+		// 		provider,
+		// 		urlCallback: (oauthUrl: string) => {
+		// 			if (popup) popup.location.href = oauthUrl;
+		// 		}
+		// 	});
+
+		// } catch (e: any) {
+		// 	error = e?.message ?? 'Login failed. Please try again.';
+		// } finally {
+		// 	loadingProvider = '';
+		// 	if (popup && !popup.closed) popup.close();
+		// }
 	}
 </script>
 
