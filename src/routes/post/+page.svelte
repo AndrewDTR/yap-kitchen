@@ -6,13 +6,13 @@
 		<h1>Make a post</h1>
 
 		<p>Title</p>
-		<input type="text" name="title" />
+		<input type="text" name="title" minlength="3" maxlength="150" required />
 
 		<p>Slug</p>
-		<input type="text" name="slug" />
+		<input type="text" name="slug" minlength="3" maxlength="50" required />
 
 		<p>Content</p>
-		<textarea name="content" id="post-content"></textarea>
+		<textarea name="content" id="post-content" required></textarea>
 
 		<button type="submit">Submit</button>
 	</form>

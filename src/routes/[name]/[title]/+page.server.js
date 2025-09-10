@@ -11,6 +11,7 @@ export async function load({ params }) {
 	try {
 		user = await pb.collection('users').getFirstListItem(`username = "${params.name}"`);
 	} catch (err) {
+
 		error(404, "That user doesn't exist.");
 	}
 
@@ -19,12 +20,14 @@ export async function load({ params }) {
 	}
 
 	let post;
+	const encodedSlug = encodeURIComponent(params.title);
+	const safe = encodedSlug.replace(/"/g, '\\"');
+
 
 	try {
-		post = await pb
-			.collection('posts')
-			.getFirstListItem(`author = "${user.id}" && slug = "${params.title}"`, { expand: 'author' });
-
+		console.log(params.title);
+		const filter = `author = "${user.id}" && slug = "${safe}"`;
+		post = await pb.collection('posts').getFirstListItem(filter, { expand: 'author' });
 	} catch (err) {
 		throw error(404, "Blog post does not exist.");
 	}
