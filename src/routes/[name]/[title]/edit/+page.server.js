@@ -77,7 +77,7 @@ export async function load({ locals, params }) {
 	const sanitizedPost = {
 		id: post.id,
 		title: post.title,
-		slug: post.slug,
+		slug: decodeURIComponent(post.slug),
 		content: post.content,
 		created: post.created,
 		updated: post.updated,
