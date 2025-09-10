@@ -2,15 +2,17 @@ import { redirect, error } from '@sveltejs/kit';
 import pb from '../../../../helper/superuser.js';
 
 export const actions = {
-    delete: async ({ locals, request, params }) => {
-        const user = await pb.collection('users').getFirstListItem(`username = "${params.name}"`);
+    delete: async ({ locals, params }) => {
+    const user = await pb.collection('users').getFirstListItem(`username = "${params.name}"`);
         if (!user) {
             throw error(404, 'User not found');
         }
 
+        const encodedSlug = encodeURIComponent(params.title);
+        const safeSlug = encodedSlug.replace(/"/g, '\\"');
         const post = await pb
             .collection('posts')
-            .getFirstListItem(`author = "${user.id}" && slug = "${params.title}"`, { expand: 'author' });
+            .getFirstListItem(`author = "${user.id}" && slug = "${safeSlug}"`, { expand: 'author' });
 
         if (!post) {
             throw error(404, 'Post not found');
@@ -38,9 +40,12 @@ export async function load({ locals, params }) {
         throw error(404, 'User not found');
     }
 
+    // Re-encode slug from route param because SvelteKit provides decoded value
+    const encodedSlug = encodeURIComponent(params.title);
+    const safeSlug = encodedSlug.replace(/"/g, '\\"');
     const post = await pb
         .collection('posts')
-        .getFirstListItem(`author = "${user.id}" && slug = "${params.title}"`, { expand: 'author' });
+        .getFirstListItem(`author = "${user.id}" && slug = "${safeSlug}"`, { expand: 'author' });
 
     if (!post) {
         throw error(404, 'Post not found');

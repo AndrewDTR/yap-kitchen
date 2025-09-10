@@ -21,15 +21,12 @@ export async function load({ params }) {
 
 	let post;
 	const encodedSlug = encodeURIComponent(params.title);
-	const safe = encodedSlug.replace(/"/g, '\\"');
-
-
+	const safeSlug = encodedSlug.replace(/"/g, '\\"');
 	try {
-		console.log(params.title);
-		const filter = `author = "${user.id}" && slug = "${safe}"`;
+		const filter = `author = "${user.id}" && slug = "${safeSlug}"`;
 		post = await pb.collection('posts').getFirstListItem(filter, { expand: 'author' });
 	} catch (err) {
-		throw error(404, "Blog post does not exist.");
+		throw error(404, 'Blog post does not exist.');
 	}
 	if (!post) {
 		throw error(404, 'Post not found');

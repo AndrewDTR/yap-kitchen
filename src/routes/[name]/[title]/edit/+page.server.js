@@ -59,9 +59,11 @@ export async function load({ locals, params }) {
 		throw error(404, 'User not found');
 	}
 
+	const encodedSlug = encodeURIComponent(params.title);
+	const safeSlug = encodedSlug.replace(/"/g, '\\"');
 	const post = await pb
 		.collection('posts')
-		.getFirstListItem(`author = "${user.id}" && slug = "${params.title}"`, { expand: 'author' });
+		.getFirstListItem(`author = "${user.id}" && slug = "${safeSlug}"`, { expand: 'author' });
 
 	if (!post) {
 		throw error(404, 'Post not found');
