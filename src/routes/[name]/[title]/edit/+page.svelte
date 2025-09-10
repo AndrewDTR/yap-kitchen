@@ -19,7 +19,7 @@
 		<textarea name="content" id="post-content">{data.post.content}</textarea>
 
 		<div class="button-padding" type="submit">
-			<Button color={data.logUser.color} text="edit"></Button>
+			<Button color={data.logUser.color} text="edit it!"></Button>
 		</div>
 	</form>
 </div>

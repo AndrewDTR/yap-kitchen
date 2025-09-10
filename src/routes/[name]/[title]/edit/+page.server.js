@@ -1,6 +1,4 @@
 import { redirect, error } from '@sveltejs/kit';
-import markdownit from 'markdown-it';
-import mk from '@vscode/markdown-it-katex';
 import { format } from 'date-fns';
 import pb from '../../../../helper/superuser.js';
 
@@ -8,7 +6,9 @@ export const actions = {
 	edit: async ({ locals, request }) => {
 		const formData = await request.formData();
 		const title = formData.get('title');
-		const slug = formData.get('slug');
+		const rawSlug = formData.get('slug');
+		const decodedSlug = typeof rawSlug === 'string' ? rawSlug : (rawSlug?.toString() || '');
+		const slug = encodeURIComponent(decodedSlug.trim());
 		const content = formData.get('content');
 		const id = formData.get('id');
 
@@ -36,11 +36,8 @@ export const actions = {
 			throw error(500, 'Update failed');
 		}
 
-
 		redirect(301, `/${locals.pb.authStore.model.username}/${slug}`);
 		return { success: true };
-
-
 	}
 }
 
