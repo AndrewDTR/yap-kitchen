@@ -116,7 +116,9 @@
 	}
 
 	.user p {
-		word-break: break-all;
+		word-break: normal;
+		overflow-wrap: break-word;
+		hyphens: auto;
 	}
 
 	.user h2 {
