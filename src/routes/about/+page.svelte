@@ -1,3 +1,7 @@
+<svelte:head>
+	<title>yap kitchen - about</title>
+</svelte:head>
+
 <div class="content">
 	<h1>&#9658; yap manifesto</h1>
 	<i>

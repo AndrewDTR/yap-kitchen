@@ -4,6 +4,11 @@
 	console.log(data);
 </script>
 
+<svelte:head>
+	<title>delete post?</title>
+</svelte:head>
+
+
 <div class="content">
 	<form method="POST" action="?/delete">
 		<h1>Delete "{data.post.title}"?</h1>

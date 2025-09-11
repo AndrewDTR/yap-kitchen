@@ -66,6 +66,7 @@
 </div>
 
 <svelte:head>
+	<title>yap kitchen - {data.user.username}</title>
 	<link rel="icon" href={data.user.avatarUrl} sizes="any" type="image/svg+xml" />
 	<meta property="og:title" content="{data.user.username} - yap.kitchen" />
 	{#if data.posts.length === 0}

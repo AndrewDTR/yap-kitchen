@@ -3,6 +3,10 @@
 	let { data } = $props();
 </script>
 
+<svelte:head>
+	<title>edit post</title>
+</svelte:head>
+
 <div class="content">
 	<form method="POST" action="?/edit">
 		<input type="hidden" name="id" value={data.post.id} />

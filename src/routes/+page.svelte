@@ -46,6 +46,7 @@
 </div>
 
 <svelte:head>
+	<title>yap kitchen</title>
 	<meta property="og:title" content="yap kitchen" />
 	<meta name="og:description" content="an ad-free, easy-to-load, minimalist blog sharing site." />
 </svelte:head>

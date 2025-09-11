@@ -3,6 +3,10 @@
 	let { data } = $props();
 </script>
 
+<svelte:head>
+	<title>yap kitchen - users</title>
+</svelte:head>
+
 <div class="content">
 	<h1>&#9658; user directory</h1>
 

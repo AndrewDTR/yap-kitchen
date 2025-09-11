@@ -1,6 +1,10 @@
 <script>
 </script>
 
+<svelte:head>
+	<title>yap kitchen - post</title>
+</svelte:head>
+
 <div class="content">
 	<form method="POST" action="?/post">
 		<h1>Make a post</h1>
