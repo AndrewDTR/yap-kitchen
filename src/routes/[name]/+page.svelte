@@ -20,7 +20,7 @@
 		}
 	}
 
-	let reversedPosts = [...data.posts].reverse();
+	let reversedPosts = $derived([...data.posts].reverse());
 </script>
 
 <div class="content">
