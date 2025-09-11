@@ -56,4 +56,9 @@
 	.button-bar :global(.main) {
 		flex: 1 1 0;
 	}
+
+	:global(.user-post p) {
+		line-height: 125%;
+		margin-bottom: 10px;
+	}
 </style>
