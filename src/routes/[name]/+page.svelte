@@ -54,7 +54,7 @@
 		{/if}
 	</div>
 	<div class="posts">
-		{#each reversedPosts as post}
+		{#each reversedPosts as post (post.slug)}
 			<BlogPost
 				title={post.title}
 				slug={post.slug}

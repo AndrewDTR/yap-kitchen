@@ -10,6 +10,7 @@ export async function load({ params }) {
 	let user;
 	try {
 		user = await pb.collection('users').getFirstListItem(`username = "${params.name}"`);
+	// eslint-disable-next-line no-unused-vars
 	} catch (err) {
 
 		error(404, "That user doesn't exist.");
@@ -25,6 +26,7 @@ export async function load({ params }) {
 	try {
 		const filter = `author = "${user.id}" && slug = "${safeSlug}"`;
 		post = await pb.collection('posts').getFirstListItem(filter, { expand: 'author' });
+	// eslint-disable-next-line no-unused-vars
 	} catch (err) {
 		throw error(404, 'Blog post does not exist.');
 	}
