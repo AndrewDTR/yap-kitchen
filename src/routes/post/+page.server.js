@@ -9,7 +9,7 @@ export const actions = {
         const content = formData.get('content');
 
         if (!locals.pb.authStore.isValid) {
-            throw error(401, 'Not logged in');
+            error(401, 'Not logged in');
         }
 
         // TODO check that their account is verified
@@ -23,7 +23,7 @@ export const actions = {
             };
             const record = await pb.collection('posts').create(data);
         } catch (err) {
-            throw error(500, 'Post creation failed: ' + err);
+            error(500, 'Post creation failed: ' + err);
         }
 
 

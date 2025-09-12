@@ -18,12 +18,12 @@ export const actions = {
 		console.log('id:', id);
 
 		if (!locals.pb.authStore.isValid) {
-			throw error(401, 'Not logged in');
+			error(401, 'Not logged in');
 		}
 
 		const post = await pb.collection('posts').getOne(id);
 		if (post.author !== locals.pb.authStore.model.id) {
-			throw error(403, 'You do not own this post');
+			error(403, 'You do not own this post');
 		}
 
 		try {
@@ -33,7 +33,7 @@ export const actions = {
 				content
 			});
 		} catch (err) {
-			throw error(500, 'Update failed');
+			error(500, 'Update failed');
 		}
 
 		redirect(301, `/${locals.pb.authStore.model.username}/${slug}`);
@@ -44,7 +44,7 @@ export const actions = {
 export async function load({ locals, params }) {
 
 	if (!locals.pb.authStore.isValid) {
-		throw error(401, 'You need to be logged in to do that.');
+		error(401, 'You need to be logged in to do that.');
 	}
 
 	if (locals.pb.authStore.model.username != params.name) {
@@ -53,7 +53,7 @@ export async function load({ locals, params }) {
 
 	const user = await pb.collection('users').getFirstListItem(`username = "${params.name}"`);
 	if (!user) {
-		throw error(404, 'User not found');
+		error(404, 'User not found');
 	}
 
 	const encodedSlug = encodeURIComponent(params.title);
@@ -63,7 +63,7 @@ export async function load({ locals, params }) {
 		.getFirstListItem(`author = "${user.id}" && slug = "${safeSlug}"`, { expand: 'author' });
 
 	if (!post) {
-		throw error(404, 'Post not found');
+		error(404, 'Post not found');
 	}
 
 	const author = {

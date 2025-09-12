@@ -16,7 +16,7 @@ export async function load({ params }) {
 	}
 
 	if (!user) {
-		throw error(404, 'User not found');
+		error(404, 'User not found');
 	}
 
 	let post;
@@ -27,10 +27,10 @@ export async function load({ params }) {
 		post = await pb.collection('posts').getFirstListItem(filter, { expand: 'author' });
 		// eslint-disable-next-line no-unused-vars
 	} catch (err) {
-		throw error(404, 'Blog post does not exist.');
+		error(404, 'Blog post does not exist.');
 	}
 	if (!post) {
-		throw error(404, 'Post not found');
+		error(404, 'Post not found');
 	}
 
 	const result = md.render('---\n' + post.content);

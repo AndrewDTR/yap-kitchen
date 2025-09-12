@@ -34,9 +34,9 @@ export async function handle({ event, resolve }) {
 		try {
 			await pb.collection('users').update(event.locals.pb.authStore.model.id, data);
 		} catch (err) {
-			throw error(500, {
-				message: err.data.message
-			});
+			error(500, {
+            				message: err.data.message
+            			});
 		}
 	}
 
@@ -70,9 +70,9 @@ export async function handle({ event, resolve }) {
 			try {
 				await pb.collection('users').update(userId, data);
 			} catch (err) {
-				throw error(500, {
-					message: err.data.message
-				});
+				error(500, {
+                					message: err.data.message
+                				});
 			}
 		}
 	}

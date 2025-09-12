@@ -10,17 +10,17 @@ export const actions = {
         const personal_link = formData.get('personal-link');
 
         if (!locals.pb.authStore.isValid) {
-            throw error(401, 'Not logged in');
+            error(401, 'Not logged in');
         }
 
         // TODO VERIFY OWNERSHIP OF ACCOUNT
 
         if (typeof color !== 'string') {
-            throw error(400, 'Color is required');
+            error(400, 'Color is required');
         }
         color = color.trim();
         if (!/^#[0-9A-Fa-f]{6}$/.test(color)) {
-            throw error(400, 'Invalid color format');
+            error(400, 'Invalid color format');
         }
         const normalizedColor = color.toLowerCase();
 
@@ -36,25 +36,25 @@ export const actions = {
         try {
             await pb.collection('users').update(locals.pb.authStore.model.id, data);
         } catch (err) {
-            throw error(500, 'Update failed: ' + err);
+            error(500, 'Update failed: ' + err);
         }
 
-        throw redirect(301, `/${username}`);
+        redirect(301, `/${username}`);
     }
 };
 
 export async function load({ locals, params }) {
     const user = await pb.collection('users').getFirstListItem(`username = "${params.name}"`);
     if (!user) {
-        throw error(404, 'User not found');
+        error(404, 'User not found');
     }
 
     if (!locals.pb.authStore.isValid) {
-        throw error(403, 'You must be logged in to perform this action.');
+        error(403, 'You must be logged in to perform this action.');
     }
 
     if (locals.pb.authStore.model.username !== params.name) {
-        throw error(403, "You can't edit somebody else's account.");
+        error(403, "You can't edit somebody else's account.");
     }
 
     return { user };

@@ -77,7 +77,7 @@ export const actions = {
 
 
 
-		throw redirect(303, `/${username}`);
+		redirect(303, `/${username}`);
 	},
 
 	login: async ({ locals, request }) => {
@@ -100,7 +100,7 @@ export const actions = {
 				message: error.data.message
 			});
 		}
-		throw redirect(303, `/${locals.pb.authStore.model.username}`);
+		redirect(303, `/${locals.pb.authStore.model.username}`);
 	},
 
 	reset: async ({ locals, request }) => {
@@ -122,6 +122,6 @@ export const actions = {
 			});
 		}
 
-		throw redirect(303, '/login');
+		redirect(303, '/login');
 	}
 };

@@ -5,7 +5,7 @@ export const actions = {
     delete: async ({ locals, params }) => {
     const user = await pb.collection('users').getFirstListItem(`username = "${params.name}"`);
         if (!user) {
-            throw error(404, 'User not found');
+            error(404, 'User not found');
         }
 
         const encodedSlug = encodeURIComponent(params.title);
@@ -15,12 +15,12 @@ export const actions = {
             .getFirstListItem(`author = "${user.id}" && slug = "${safeSlug}"`, { expand: 'author' });
 
         if (!post) {
-            throw error(404, 'Post not found');
+            error(404, 'Post not found');
         }
 
         await pb.collection('posts').delete(post.id);
 
-        throw redirect(301, `/${locals.pb.authStore.model.username}`);
+        redirect(301, `/${locals.pb.authStore.model.username}`);
     }
 };
 
@@ -28,7 +28,7 @@ export const actions = {
 export async function load({ locals, params }) {
 
     if (!locals.pb.authStore.isValid) {
-        throw error(401, 'You need to be logged in to do that.');
+        error(401, 'You need to be logged in to do that.');
     }
 
     if (locals.pb.authStore.model.username != params.name) {
@@ -37,7 +37,7 @@ export async function load({ locals, params }) {
 
     const user = await pb.collection('users').getFirstListItem(`username = "${params.name}"`);
     if (!user) {
-        throw error(404, 'User not found');
+        error(404, 'User not found');
     }
 
     // Re-encode slug from route param because SvelteKit provides decoded value
@@ -48,7 +48,7 @@ export async function load({ locals, params }) {
         .getFirstListItem(`author = "${user.id}" && slug = "${safeSlug}"`, { expand: 'author' });
 
     if (!post) {
-        throw error(404, 'Post not found');
+        error(404, 'Post not found');
     }
 
     const author = {
