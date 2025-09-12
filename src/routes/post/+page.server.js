@@ -3,15 +3,10 @@ import pb from '../../helper/superuser.js';
 
 export const actions = {
     post: async ({ locals, request }) => {
-        console.log(locals.pb.authStore.model.id)
         const formData = await request.formData();
         const title = formData.get('title');
         const slug = formData.get('slug');
         const content = formData.get('content');
-
-        console.log('title:', title);
-        console.log('slug:', slug);
-        console.log('content:', content);
 
         if (!locals.pb.authStore.isValid) {
             throw error(401, 'Not logged in');
@@ -39,7 +34,7 @@ export const actions = {
     }
 }
 
-export async function load({ locals, params }) {
+export async function load({ locals }) {
     if (!locals.pb.authStore.model) {
         error(403, "You have to be signed in to make a post.");
     }

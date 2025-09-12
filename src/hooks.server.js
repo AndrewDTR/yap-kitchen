@@ -22,7 +22,7 @@ export async function handle({ event, resolve }) {
 	try {
 		// get an up-to-date auth store state by verifying and refreshing the loaded auth model (if any)
 		event.locals.pb.authStore.isValid && (await event.locals.pb.collection('users').authRefresh());
-	// eslint-disable-next-line no-unused-vars
+		// eslint-disable-next-line no-unused-vars
 	} catch (_) {
 		// clear the auth store on failed refresh
 		event.locals.pb.authStore.clear();
@@ -42,8 +42,6 @@ export async function handle({ event, resolve }) {
 
 	if (event.url.pathname !== '/api/pfp') {
 		if (event.locals.pb.authStore.isValid && event.locals.pb.authStore.model.avatar == '') {
-			console.log("no avatar")
-
 			const identiconFormData = new FormData();
 			identiconFormData.set('username', event.locals.pb.authStore.model.username);
 			identiconFormData.set('color', event.locals.pb.authStore.model.color)
@@ -55,7 +53,6 @@ export async function handle({ event, resolve }) {
 
 			if (!identiconResponse.ok) {
 				const { error } = await identiconResponse.json();
-				console.log("issue")
 				return fail(500, { fail: true, message: error });
 			}
 
@@ -73,7 +70,6 @@ export async function handle({ event, resolve }) {
 			try {
 				await pb.collection('users').update(userId, data);
 			} catch (err) {
-				console.log(error);
 				throw error(500, {
 					message: err.data.message
 				});

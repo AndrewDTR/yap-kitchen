@@ -2,8 +2,6 @@
 	import { browser } from '$app/environment';
 	import PocketBase from 'pocketbase';
 	import { env } from '$env/dynamic/public';
-	import { goto } from '$app/navigation';
-	import { redirect } from '@sveltejs/kit';
 
 	const pb = new PocketBase(env.PUBLIC_POCKETBASE_URL ?? 'http://127.0.0.1:8090/');
 
@@ -31,10 +29,6 @@
 		})}; path=/;`;
 
 		location.reload();
-	}
-
-	async function handleGitHubLogin() {
-		const authData = await pb.collection('users').authWithOAuth2({ provider: 'github' });
 	}
 
 	async function loginWithGitHub() {

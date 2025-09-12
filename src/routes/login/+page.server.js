@@ -67,9 +67,7 @@ export const actions = {
 			await locals.pb.collection('users').create(data);
 			await locals.pb.collection('users').authWithPassword(email, password.toString());
 			await locals.pb.collection('users').requestVerification(email);
-			console.log("bottom of email stuff")
 		} catch (error) {
-			console.log(error)
 			return fail(500, {
 				fail: true,
 				message: error.data?.message ?? "Error logging in"
@@ -102,10 +100,6 @@ export const actions = {
 				message: error.data.message
 			});
 		}
-
-		console.log("logged in i think")
-
-
 		throw redirect(303, `/${locals.pb.authStore.model.username}`);
 	},
 

@@ -43,8 +43,6 @@ export async function POST({ request }) {
                     await pb.collection('users').update(user.id, formData);
                 }
             }
-        } else {
-            console.log('No records', records);
         }
 
         return new Response(JSON.stringify({ records, message: 'Data fetched successfully' }), {

@@ -9,9 +9,6 @@ export const actions = {
         let color = formData.get('color');
         const personal_link = formData.get('personal-link');
 
-        console.log('username:', username);
-        console.log('description:', description);
-
         if (!locals.pb.authStore.isValid) {
             throw error(401, 'Not logged in');
         }

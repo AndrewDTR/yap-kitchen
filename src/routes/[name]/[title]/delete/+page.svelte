@@ -1,7 +1,6 @@
 <script>
 	import Button from '$lib/Button.svelte';
 	let { data } = $props();
-	console.log(data);
 </script>
 
 <svelte:head>
