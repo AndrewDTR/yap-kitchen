@@ -2,6 +2,8 @@
 	import BlogHeader from '$lib/blog/BlogHeader.svelte';
 	import Button from '$lib/Button.svelte';
 	let { data } = $props();
+
+	$inspect(data)
 </script>
 
 <div class="content">
@@ -28,6 +30,11 @@
 		</div>
 	{/if}
 	<div class="user-post">{@html data.result}</div>
+
+	<h2 class="comments">comments</h2>
+	{#each data.comments as comment}
+		<p>{JSON.stringify(comment)}</p>
+	{/each}
 </div>
 
 <svelte:head>
