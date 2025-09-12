@@ -1,6 +1,12 @@
 <script>
-	export let title = 'Name Placeholder';
-	export let description = 'Description Placeholder';
+	/**
+	 * @typedef {Object} Props
+	 * @property {string} [title]
+	 * @property {string} [description]
+	 */
+
+	/** @type {Props} */
+	let { title = 'Name Placeholder', description = 'Description Placeholder' } = $props();
 	let color = '#FFFFFF';
 
 	function adjustColor(hex, factor, mode = 'lighten') {
@@ -24,9 +30,9 @@
 		return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
 	}
 
-	let shadowColor;
-	$: shadowColor = adjustColor(color, 0.7, 'darken');
-	$: clickColor = adjustColor(color, 0.5, 'lighten');
+	let shadowColor = $derived(adjustColor(color, 0.7, 'darken'));
+	
+	let clickColor = $derived(adjustColor(color, 0.5, 'lighten'));
 </script>
 
 <div

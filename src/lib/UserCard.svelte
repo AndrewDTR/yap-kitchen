@@ -1,8 +1,19 @@
 <script>
-	export let name = 'Name Placeholder';
-	export let description = 'Description Placeholder';
-	export let color = '#000000';
-	export let avatar = '';
+	/**
+	 * @typedef {Object} Props
+	 * @property {string} [name]
+	 * @property {string} [description]
+	 * @property {string} [color]
+	 * @property {string} [avatar]
+	 */
+
+	/** @type {Props} */
+	let {
+		name = 'Name Placeholder',
+		description = 'Description Placeholder',
+		color = '#000000',
+		avatar = ''
+	} = $props();
 
 	function adjustColor(hex, factor, mode = 'lighten') {
 		let r = parseInt(hex.slice(1, 3), 16);
@@ -25,9 +36,9 @@
 		return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
 	}
 
-	let shadowColor;
-	$: shadowColor = adjustColor(color, 0.7, 'darken');
-	$: clickColor = adjustColor(color, 0.5, 'lighten');
+	let shadowColor = $derived(adjustColor(color, 0.7, 'darken'));
+	
+	let clickColor = $derived(adjustColor(color, 0.5, 'lighten'));
 </script>
 
 <a href="/{name}">

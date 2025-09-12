@@ -2,7 +2,7 @@
 	import Footer from '$lib/Footer.svelte';
 	import Navbar from '$lib/Navbar.svelte';
 	import { page } from '$app/state';
-	let { data } = $props();
+	let { children, data } = $props();
 
 	function adjustColor(hex, factor, mode = 'lighten') {
 		let r = parseInt(hex.slice(1, 3), 16);
@@ -32,7 +32,7 @@
 <div class="page-wrapper" style="background-color: {shadowColor};">
 	<Navbar />
 	<div class="main-content">
-		<slot></slot>
+		{@render children?.()}
 	</div>
 	<Footer commitHash={data.commitHash} environment={data.environment} />
 </div>

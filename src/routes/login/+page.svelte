@@ -69,11 +69,11 @@
 	>
 		<h1 class="title">log in to yap.kitchen 👨‍🍳</h1>
 		<div class="oauth-grid">
-			<button class="btn oauth discord" on:click={loginWithDiscord}>
+			<button class="btn oauth discord" onclick={loginWithDiscord}>
 				<span>{'Continue with Discord'}</span>
 			</button>
 
-			<button class="btn oauth github" on:click={loginWithGitHub}>
+			<button class="btn oauth github" onclick={loginWithGitHub}>
 				<span>{'Continue with GitHub'}</span>
 			</button>
 			<!-- <button on:click={loginWithDiscord}>Login with Discord</button>

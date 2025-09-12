@@ -1,8 +1,19 @@
 <script>
-	export let title = 'Title';
-	export let slug = 'slug';
-	export let author = 'Example';
-	export let date = 'January 1st, 2025';
+	/**
+	 * @typedef {Object} Props
+	 * @property {string} [title]
+	 * @property {string} [slug]
+	 * @property {string} [author]
+	 * @property {string} [date]
+	 */
+
+	/** @type {Props} */
+	let {
+		title = 'Title',
+		slug = 'slug',
+		author = 'Example',
+		date = 'January 1st, 2025'
+	} = $props();
 </script>
 
 <a href="/{author}/{slug}">

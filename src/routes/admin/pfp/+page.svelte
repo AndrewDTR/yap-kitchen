@@ -15,4 +15,4 @@
 	}
 </script>
 
-<button on:click={callBackend}>Run Script</button>
+<button onclick={callBackend}>Run Script</button>

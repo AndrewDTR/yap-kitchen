@@ -1,9 +1,21 @@
 <script>
-	export let title = 'Title';
-	export let author = 'Author';
-	export let date = 'January 1st, 1900';
-	export let editedDate;
-	export let color = '#000000';
+	/**
+	 * @typedef {Object} Props
+	 * @property {string} [title]
+	 * @property {string} [author]
+	 * @property {string} [date]
+	 * @property {any} editedDate
+	 * @property {string} [color]
+	 */
+
+	/** @type {Props} */
+	let {
+		title = 'Title',
+		author = 'Author',
+		date = 'January 1st, 1900',
+		editedDate,
+		color = '#000000'
+	} = $props();
 
 	function adjustColor(hex, factor, mode = 'lighten') {
 		let r = parseInt(hex.slice(1, 3), 16);
@@ -26,8 +38,8 @@
 		return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
 	}
 
-	let shadowColor;
-	$: shadowColor = adjustColor(color, 0.7, 'darken');
+	let shadowColor = $derived(adjustColor(color, 0.7, 'darken'));
+	
 </script>
 
 <div class="blog-header" style="--user-color: {color}; --shadow-color: {shadowColor};">

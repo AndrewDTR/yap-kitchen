@@ -1,10 +1,23 @@
 <script>
-	export let color = '#000000';
-	export let avatarUrl = 'https://yap.kitchen';
-	export let username = 'Username';
-	export let description = 'Description';
-	export let humanReadableCreated = 'January 1st, 1900';
-	export let personal_link = 'https://yap.kitchen';
+	/**
+	 * @typedef {Object} Props
+	 * @property {string} [color]
+	 * @property {string} [avatarUrl]
+	 * @property {string} [username]
+	 * @property {string} [description]
+	 * @property {string} [humanReadableCreated]
+	 * @property {string} [personal_link]
+	 */
+
+	/** @type {Props} */
+	let {
+		color = '#000000',
+		avatarUrl = 'https://yap.kitchen',
+		username = 'Username',
+		description = 'Description',
+		humanReadableCreated = 'January 1st, 1900',
+		personal_link = 'https://yap.kitchen'
+	} = $props();
 
 	function adjustColor(hex, factor, mode = 'lighten') {
 		let r = parseInt(hex.slice(1, 3), 16);
@@ -27,8 +40,8 @@
 		return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
 	}
 
-	let shadowColor;
-	$: shadowColor = adjustColor(color, 0.7, 'darken');
+	let shadowColor = $derived(adjustColor(color, 0.7, 'darken'));
+	
 </script>
 
 <div class="hero" style="--user-color: {color}; --shadow-color: {shadowColor};">
