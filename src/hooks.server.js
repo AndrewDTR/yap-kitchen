@@ -30,13 +30,13 @@ export async function handle({ event, resolve }) {
 
 	if (event.locals.pb.authStore.isValid && event.locals.pb.authStore.model.color == '') {
 		const data = new FormData();
-		data.set('color', "#cccccc");
+		data.set('color', '#cccccc');
 		try {
 			await pb.collection('users').update(event.locals.pb.authStore.model.id, data);
 		} catch (err) {
 			error(500, {
-            				message: err.data.message
-            			});
+				message: err.data.message
+			});
 		}
 	}
 
@@ -44,7 +44,7 @@ export async function handle({ event, resolve }) {
 		if (event.locals.pb.authStore.isValid && event.locals.pb.authStore.model.avatar == '') {
 			const identiconFormData = new FormData();
 			identiconFormData.set('username', event.locals.pb.authStore.model.username);
-			identiconFormData.set('color', event.locals.pb.authStore.model.color)
+			identiconFormData.set('color', event.locals.pb.authStore.model.color);
 
 			const identiconResponse = await event.fetch('/api/pfp', {
 				method: 'POST',
@@ -71,8 +71,8 @@ export async function handle({ event, resolve }) {
 				await pb.collection('users').update(userId, data);
 			} catch (err) {
 				error(500, {
-                					message: err.data.message
-                				});
+					message: err.data.message
+				});
 			}
 		}
 	}

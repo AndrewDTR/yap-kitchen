@@ -11,12 +11,7 @@
 	 */
 
 	/** @type {Props} */
-	let {
-		color = '#cccccc',
-		text = 'Hello',
-		href,
-		children
-	} = $props();
+	let { color = '#cccccc', text = 'Hello', href, children } = $props();
 
 	function adjustColor(hex, factor, mode = 'lighten') {
 		let r = parseInt(hex.slice(1, 3), 16);
@@ -39,10 +34,8 @@
 		return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
 	}
 
-	let shadowColor = $derived(adjustColor(color, 0.7, 'darken')), clickColor = $derived(adjustColor(color, 0.5, 'lighten'));
-
-	
-	
+	let shadowColor = $derived(adjustColor(color, 0.7, 'darken')),
+		clickColor = $derived(adjustColor(color, 0.5, 'lighten'));
 </script>
 
 {#if href}

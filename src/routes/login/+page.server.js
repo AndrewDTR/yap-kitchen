@@ -10,17 +10,15 @@ function base64ToBlob(base64, mimeType) {
 	return new Blob([bytes], { type: mimeType });
 }
 
-
 export async function load({ locals }) {
 	if (locals.pb.authStore.model) {
-		return redirect(303, `/${locals.pb.authStore.model.username}`)
+		return redirect(303, `/${locals.pb.authStore.model.username}`);
 	}
 
 	return {};
 }
 
 export const actions = {
-
 	register: async ({ fetch, locals, request }) => {
 		const data = await request.formData();
 		const email = data.get('email');
@@ -58,10 +56,8 @@ export const actions = {
 
 		data.set('color', '#cccccc');
 
-
 		data.set('passwordConfirm', password?.toString());
 		data.set('username', username);
-
 
 		try {
 			await locals.pb.collection('users').create(data);
@@ -70,12 +66,9 @@ export const actions = {
 		} catch (error) {
 			return fail(500, {
 				fail: true,
-				message: error.data?.message ?? "Error logging in"
+				message: error.data?.message ?? 'Error logging in'
 			});
-
 		}
-
-
 
 		redirect(303, `/${username}`);
 	},
@@ -88,7 +81,7 @@ export const actions = {
 		if (!email || !password) {
 			return fail(400, {
 				emailRequired: email === null,
-				passwordRequired: password === null,
+				passwordRequired: password === null
 			});
 		}
 

@@ -39,7 +39,6 @@
 	}
 
 	let shadowColor = $derived(adjustColor(color, 0.7, 'darken'));
-	
 </script>
 
 <div class="blog-header" style="--user-color: {color}; --shadow-color: {shadowColor};">

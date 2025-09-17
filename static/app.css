@@ -124,8 +124,7 @@ a:focus {
 }
 
 hr {
-	border: 0; 
-	border-top: 2px solid #000000; 
+	border: 0;
+	border-top: 2px solid #000000;
 	margin: 10px 0;
-  }
-  
+}

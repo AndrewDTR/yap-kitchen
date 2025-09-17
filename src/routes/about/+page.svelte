@@ -27,9 +27,9 @@
 
 	<h1>&#9658; about</h1>
 	<p>
-		Hi, welcome to Yap Kitchen. This is a fun little site (that I made to teach myself SvelteKit) where you can put blog posts about the
-		topic of your choosing. Posts are rendered in markdown (with LaTeX formatting enabled, for those
-		into math typesetting) so you can yap as you please.
+		Hi, welcome to Yap Kitchen. This is a fun little site (that I made to teach myself SvelteKit)
+		where you can put blog posts about the topic of your choosing. Posts are rendered in markdown
+		(with LaTeX formatting enabled, for those into math typesetting) so you can yap as you please.
 	</p>
 	<p>
 		Please do not use generative artificial intelligence to write your posts. They are antithetical

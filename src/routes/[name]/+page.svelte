@@ -24,6 +24,11 @@
 </script>
 
 <div class="content">
+	{#if data.unverified}
+		<div class="unverified">
+			<p class="unverified-text"><b style="padding-right: 4px;">Warning:</b>You are unverified. Other people cannot see your account.</p>
+		</div>
+	{/if}
 	<UserInfo
 		color={data.user.color}
 		avatarUrl={data.user.avatarUrl}
@@ -115,5 +120,17 @@
 	.user-posts {
 		padding: 1rem;
 		border: 1.5px solid black;
+	}
+
+	.unverified {
+		background-color: rgb(255, 151, 151);
+		padding-top: 8px;
+		padding-bottom: 8px;
+		padding-left: 2px;
+		padding-right: 2px;
+	}
+
+	.unverified-text {
+		padding: 4px;
 	}
 </style>

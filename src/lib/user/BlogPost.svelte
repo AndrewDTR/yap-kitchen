@@ -8,12 +8,7 @@
 	 */
 
 	/** @type {Props} */
-	let {
-		title = 'Title',
-		slug = 'slug',
-		author = 'Example',
-		date = 'January 1st, 2025'
-	} = $props();
+	let { title = 'Title', slug = 'slug', author = 'Example', date = 'January 1st, 2025' } = $props();
 </script>
 
 <a href="/{author}/{slug}">

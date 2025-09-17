@@ -8,8 +8,7 @@
 # posting system
 
 - allow images in the actual blog posts?
-    - yes, externally
-  		- but no XSS!!
+  - yes, externally - but no XSS!!
 
 # logistics
 
@@ -17,5 +16,4 @@
 - terms of service
 - index page FAQ
 - abou page
-- fix OG images being temporary pngs/svgs
-  	- is this even an issue or was it just cross site dev/prod issues
+- fix OG images being temporary pngs/svgs - is this even an issue or was it just cross site dev/prod issues

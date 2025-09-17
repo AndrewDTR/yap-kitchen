@@ -3,7 +3,7 @@
 	import Button from '$lib/Button.svelte';
 	let { data } = $props();
 
-	$inspect(data)
+	$inspect(data);
 </script>
 
 <div class="content">

@@ -37,7 +37,7 @@
 	}
 
 	let shadowColor = $derived(adjustColor(color, 0.7, 'darken'));
-	
+
 	let clickColor = $derived(adjustColor(color, 0.5, 'lighten'));
 </script>
 

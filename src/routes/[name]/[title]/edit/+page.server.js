@@ -7,7 +7,7 @@ export const actions = {
 		const formData = await request.formData();
 		const title = formData.get('title');
 		const rawSlug = formData.get('slug');
-		const decodedSlug = typeof rawSlug === 'string' ? rawSlug : (rawSlug?.toString() || '');
+		const decodedSlug = typeof rawSlug === 'string' ? rawSlug : rawSlug?.toString() || '';
 		const slug = encodeURIComponent(decodedSlug.trim());
 		const content = formData.get('content');
 		const id = formData.get('id');
@@ -32,23 +32,23 @@ export const actions = {
 				slug,
 				content
 			});
-		} catch (err) {
+		// eslint-disable-next-line no-unused-vars
+		} catch (_) {
 			error(500, 'Update failed');
 		}
 
 		redirect(301, `/${locals.pb.authStore.model.username}/${slug}`);
 		return { success: true };
 	}
-}
+};
 
 export async function load({ locals, params }) {
-
 	if (!locals.pb.authStore.isValid) {
 		error(401, 'You need to be logged in to do that.');
 	}
 
 	if (locals.pb.authStore.model.username != params.name) {
-		error(403, "You can't edit somebody else's posts.")
+		error(403, "You can't edit somebody else's posts.");
 	}
 
 	const user = await pb.collection('users').getFirstListItem(`username = "${params.name}"`);
@@ -68,7 +68,7 @@ export async function load({ locals, params }) {
 
 	const author = {
 		username: post.expand?.author?.username,
-		color: post.expand?.author?.color,
+		color: post.expand?.author?.color
 	};
 
 	const sanitizedPost = {

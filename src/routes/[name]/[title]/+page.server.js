@@ -6,7 +6,12 @@ import pb from '../../../helper/superuser.js';
 
 const md = markdownit().use(mk.default);
 
-export async function load({ params }) {
+export async function load({ params, locals }) {
+
+	if (!locals.pb.authStore.model?.verified) {
+		error(403, "User not verified.");
+	}
+	
 	let user;
 	try {
 		user = await pb.collection('users').getFirstListItem(`username = "${params.name}"`);
@@ -59,7 +64,7 @@ export async function load({ params }) {
 	};
 
 	const comments = await pb.collection('comments').getFullList({
-		filter: "",
+		filter: '',
 		sort: '-created',
 		expand: 'author',
 		fields: 'comment, created, expand.author.username, expand.author.avatar, expand.author.color'

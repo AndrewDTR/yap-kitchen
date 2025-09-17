@@ -2,7 +2,8 @@ import { error } from '@sveltejs/kit';
 import { format } from 'date-fns';
 import pb from '../../helper/superuser.js';
 
-export async function load({ params }) {
+export async function load({ params, locals }) {
+	let unverified;
 	try {
 		const user = await pb.collection('users').getFirstListItem(`username = "${params.name}"`, {
 			fields: 'created, id, username, description, personal_link, avatar, pngAvatar, color'
@@ -10,6 +11,14 @@ export async function load({ params }) {
 
 		if (!user) {
 			error(404);
+		}
+
+		if (locals.pb.authStore.model?.username != params.name && !locals.pb.authStore.model?.verified) {
+			error(403, "User not verified.");
+		}
+
+		if (!locals.pb.authStore.model.verified) {
+			unverified = true;
 		}
 
 		const record = await pb.collection('users').getOne(user.id);
@@ -33,7 +42,7 @@ export async function load({ params }) {
 			};
 		});
 
-		return { user: userWithAvatar, posts: formattedPosts };
+		return { user: userWithAvatar, posts: formattedPosts, unverified };
 	} catch (err) {
 		if (err.status == 404) {
 			error(404, "That user doesn't exist.");
