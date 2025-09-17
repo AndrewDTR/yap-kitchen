@@ -6,12 +6,7 @@ import pb from '../../../helper/superuser.js';
 
 const md = markdownit().use(mk.default);
 
-export async function load({ params, locals }) {
-
-	if (!locals.pb.authStore.model?.verified) {
-		error(403, "User not verified.");
-	}
-	
+export async function load({ params }) {
 	let user;
 	try {
 		user = await pb.collection('users').getFirstListItem(`username = "${params.name}"`);

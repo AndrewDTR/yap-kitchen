@@ -44,11 +44,6 @@ export const actions = {
 };
 
 export async function load({ locals, params }) {
-
-	if (!locals.pb.authStore.model?.verified) {
-		error(403, "User not verified.");
-	}
-
 	const user = await pb.collection('users').getFirstListItem(`username = "${params.name}"`);
 	if (!user) {
 		error(404, 'User not found');
@@ -60,6 +55,10 @@ export async function load({ locals, params }) {
 
 	if (locals.pb.authStore.model.username !== params.name) {
 		error(403, "You can't edit somebody else's account.");
+	}
+
+	if (!locals.pb.authStore.model?.verified) {
+		error(403, "You're not verified.");
 	}
 
 	return { user };

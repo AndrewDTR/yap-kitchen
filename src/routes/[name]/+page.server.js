@@ -6,18 +6,18 @@ export async function load({ params, locals }) {
 	let unverified;
 	try {
 		const user = await pb.collection('users').getFirstListItem(`username = "${params.name}"`, {
-			fields: 'created, id, username, description, personal_link, avatar, pngAvatar, color'
+			fields: 'created, id, username, description, personal_link, avatar, pngAvatar, color, verified'
 		});
 
 		if (!user) {
 			error(404);
 		}
 
-		if (locals.pb.authStore.model?.username != params.name && !locals.pb.authStore.model?.verified) {
+		if (locals.pb.authStore.model?.username != params.name && !user.verified) {
 			error(403, "User not verified.");
 		}
 
-		if (!locals.pb.authStore.model.verified) {
+		if (!locals.pb.authStore.model.verified && locals.pb.authStore.model?.username == params.name) {
 			unverified = true;
 		}
 
