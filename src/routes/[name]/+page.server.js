@@ -17,7 +17,7 @@ export async function load({ params, locals }) {
 			error(403, "User not verified.");
 		}
 
-		if (!locals.pb.authStore.model.verified && locals.pb.authStore.model?.username == params.name) {
+		if (!locals.pb.authStore.model?.verified && locals.pb.authStore.model?.username == params.name) {
 			unverified = true;
 		}
 
