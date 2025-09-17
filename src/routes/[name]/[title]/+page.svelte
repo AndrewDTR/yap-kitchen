@@ -31,10 +31,10 @@
 	{/if}
 	<div class="user-post">{@html data.result}</div>
 
-	<h2 class="comments">comments</h2>
+	<!-- <h2 class="comments">comments</h2>
 	{#each data.comments as comment}
 		<p>{JSON.stringify(comment)}</p>
-	{/each}
+	{/each} -->
 </div>
 
 <svelte:head>
