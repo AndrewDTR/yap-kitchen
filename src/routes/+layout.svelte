@@ -37,6 +37,17 @@
 	<Footer commitHash={data.commitHash} environment={data.environment} />
 </div>
 
+<svelte:head>
+	<link
+		rel="preload"
+		as="font"
+		type="font/woff2"
+		href="/fonts/SourceSans3-Italic.woff2"
+		crossorigin
+		fetchpriority="high"
+	/>
+</svelte:head>
+
 <style>
 	.page-wrapper {
 		display: flex;
