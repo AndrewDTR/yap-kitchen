@@ -27,7 +27,7 @@ export const actions = {
 			error(500, 'Post creation failed: ' + err);
 		}
 
-		redirect(301, `/${locals.pb.authStore.model.username}/${slug}`);
+		redirect(301, `/${locals.pb.authStore.model.username}/${slug.toLowerCase()}`);
 		return { success: true };
 	}
 };
