@@ -2,8 +2,6 @@
 	import BlogHeader from '$lib/blog/BlogHeader.svelte';
 	import Button from '$lib/Button.svelte';
 	let { data } = $props();
-
-	$inspect(data);
 </script>
 
 <div class="content">
