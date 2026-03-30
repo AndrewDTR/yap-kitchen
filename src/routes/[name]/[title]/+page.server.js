@@ -4,7 +4,7 @@ import mk from '@vscode/markdown-it-katex';
 import { format } from 'date-fns';
 import pb from '../../../helper/superuser.js';
 
-const md = markdownit().use(mk.default);
+const md = markdownit({ linkify: true }).use(mk.default);
 
 export async function load({ params }) {
 	let user;
